@@ -51,7 +51,7 @@ function ctdSeaProcessing (varargin)
     config_filename = uigetfile('*.ini', 'Select configuration file .ini');
     p = configuration(config_filename);
   else
-    ConfigFileName = [mfilename '.mat'];
+    ConfigFileName = ['\' mfilename '.mat'];
     ConfigFile = load([prefdir '' ConfigFileName]);
     p = ConfigFile.p;
   end
@@ -304,7 +304,7 @@ function ctdSeaProcessing (varargin)
 
   % Help
   function help(~, ~)
-    fid_helpfile = fopen('help.dat');
+    fid_helpfile = fopen('readme.md');
     file = textscan(fid_helpfile, '%s', 'Delimiter', '\n');
     helpdlg(file{1, 1}, 'Help')
   end
