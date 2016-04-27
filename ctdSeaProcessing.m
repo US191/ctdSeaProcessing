@@ -304,7 +304,7 @@ function ctdSeaProcessing (varargin)
 
   % Help
   function help(~, ~)
-    fid_helpfile = fopen('readme.md');
+    fid_helpfile = fopen('help.dat');
     file = textscan(fid_helpfile, '%s', 'Delimiter', '\n');
     helpdlg(file{1, 1}, 'Help')
   end
