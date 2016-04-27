@@ -1,7 +1,6 @@
  Preprocessing software for CTD-LADCP                                     
  Autor slave: Pierre Rousselot / Date: 10/03/16                           
- Jedi master: Jacques Grelet  
- Test
+ Jedi master: Jacques Grelet
 -----------------------------------------------------------------------
 
  Different steps :                                                        
