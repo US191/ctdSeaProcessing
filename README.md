@@ -33,68 +33,68 @@ At the beginning of a cruise:
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths 
 	  (The workspace file will be used for the entire cruise),
 ```
-_% Mission variables_
-_name_mission_  
-_id_mission_     
-_num_station     -> (if you want to process a specific station)_
-_filename_ADCPM  -> Name of the output master LADCP file_
-_filename_ADCPS  -> Name of the output slave LADCP file_
-_name_adcpmaster -> New name for the master LADCP file_
-_name_adcpslave  -> New name for the slace LADCP file_
-_log_filename    -> Name of the logfile_
+% Mission variables
+name_mission  
+id_mission     
+num_station     -> (if you want to process a specific station)
+filename_ADCPM  -> Name of the output master LADCP file
+filename_ADCPS  -> Name of the output slave LADCP file
+name_adcpmaster -> New name for the master LADCP file
+name_adcpslave  -> New name for the slace LADCP file
+log_filename    -> Name of the logfile
 
-_% Checkbox state (default)_
-_copyCTD         = true_
-_copyADCP        = true_
-_processCTD      = true_
-_processADCP     = true_
-_processPMEL     = false (PMEL processing is a specific CTD processing for profile without bottle)_ 
+% Checkbox state (default)
+copyCTD         = true
+copyADCP        = true
+processCTD      = true
+processADCP     = true
+processPMEL     = false (PMEL processing is a specific CTD processing for profile without bottle) 
 
-_% Path_
- _%Working dir_                                      (Path of the data processing directory)_
-_drive           = m:\_
- _%Output CTD/LADCP                                 (Path of the output CTD and LADCP files)_
-_path_seasoft    = c:\SEASOFT\_
-_path_dataladcp  = c:\LADCP\_
+% Path
+ %Working dir                                      (Path of the data processing directory)
+drive           = m:\
+ %Output CTD/LADCP                                 (Path of the output CTD and LADCP files)
+path_seasoft    = c:\SEASOFT\
+path_dataladcp  = c:\LADCP\
 
-_############################################################################_
-_% Disk Organization_
+############################################################################_
+% Disk Organization
 
-_# LDEO program location : (drive\nom_mission...)_
-_pmatlab         = \data-processing\LADCP\v10.16.2\ (Path of the LDEO program directory)_
+# LDEO program location : (drive\nom_mission...)
+pmatlab         = \data-processing\LADCP\v10.16.2\ (Path of the LDEO program directory)
 
-_#(drive\nom_mission...)_
-_pprocessingCTD  = \data-processing\CTD             (Path of the CTD data processed files)_           
+#(drive\nom_mission...)
+pprocessingCTD  = \data-processing\CTD             (Path of the CTD data processed files)           
 
-_#(path_processing...)_
-_pprocessCTD     = \data\raw\                       (Path for the CTD raw data files before processing)_
+#(path_processing...)
+pprocessCTD     = \data\raw\                       (Path for the CTD raw data files before processing)
 
-_#(drive\nom_mission...)_
-_prawCTD         = \data-raw\CTD\                   (Path for the CTD raw data files)_
+#(drive\nom_mission...)
+prawCTD         = \data-raw\CTD\                   (Path for the CTD raw data files)
 
-_#(path_seasoft\nom_mission...)_
-_poutputCTD      = \data\                           (Path of the output CTD files)_                          
+#(path_seasoft\nom_mission...)
+poutputCTD      = \data\                           (Path of the output CTD files)                          
 
-_#(drive\nom_mission\pprocessingCTD...)_
-_pbatch          = \batch\                          (Path of the .batch files for processing)_
+#(drive\nom_mission\pprocessingCTD...)
+pbatch          = \batch\                          (Path of the .batch files for processing)
 
-_#(drive\nom_mission\pprocessingCTD...)_
-_pcodac          = \data\codac\                     (Path for the compressed CTD files for CORIOLIS)_
+#(drive\nom_mission\pprocessingCTD...)
+pcodac          = \data\codac\                     (Path for the compressed CTD files for CORIOLIS)
 
-_#(drive\nom_mission\pprocessingCTD...)_
-_preports        = \data\reports\                   (Path for the CTD report files)_
+#(drive\nom_mission\pprocessingCTD...)
+preports        = \data\reports\                   (Path for the CTD report files)
 
-_#(drive\nom_mission...)_
-_pprocessingADCP = \data-processing\LADCP\data\     (Path for the LADCP data processed files)_   
+#(drive\nom_mission...)
+pprocessingADCP = \data-processing\LADCP\data\     (Path for the LADCP data processed files)   
 
-_#(drive\nom_mission...)_
-_prawADCP        = \data-raw\LADCP\                 (Path for the  LADCP raw data files before processing)_               
+#(drive\nom_mission...)
+prawADCP        = \data-raw\LADCP\                 (Path for the  LADCP raw data files before processing)               
 
-_#(path_dataladcp\nom_mission...)_
-_poutputADCP     = \download\                       (Path of the output LADCP files)_                      
+#(path_dataladcp\nom_mission...)
+poutputADCP     = \download\                       (Path of the output LADCP files)                      
 
-_#(path_dataladcp\nom_mission...)_
-_pmoveADCP       =\data\                            (Path to move the output LADCP files)_
+#(path_dataladcp\nom_mission...)
+pmoveADCP       =\data\                            (Path to move the output LADCP files)
 ```	
 	- Launch ctdSeaProcessing under Matlab.
 
