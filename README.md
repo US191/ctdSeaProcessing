@@ -9,11 +9,10 @@ Automation pre-processing software for CTD-LADCP
 -----------------------------------------------------------------------
 
 This Matlab application automate the different steps of the on-board CTD/LADCP processing:
-
- -> Copy data acquisition CTD file to processing path                     
- -> CTD SBE Processing                      
- -> Copy data acquisition LADCP file to processing path                   
- -> ADCP LDEO Processing (https://github.com/jgrelet/ladcp)      
+* Copy data acquisition CTD file to processing path                     
+* CTD SBE Processing                      
+* Copy data acquisition LADCP file to processing path                   
+* ADCP LDEO Processing (https://github.com/jgrelet/ladcp)      
 
 -----------------------------------------------------------------------
 (Need Windows for SBEDataProcessing and gzip2 for compressing Codac file)   
