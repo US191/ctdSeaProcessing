@@ -33,6 +33,7 @@ At the beginning of a cruise:
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths 
 	  (The workspace file will be used for the entire cruise),
 ```
+%% configuration.ini
 % Mission variables
 name_mission  
 id_mission     
@@ -40,7 +41,7 @@ num_station     -> (if you want to process a specific station)
 filename_ADCPM  -> Name of the output master LADCP file
 filename_ADCPS  -> Name of the output slave LADCP file
 name_adcpmaster -> New name for the master LADCP file
-name_adcpslave  -> New name for the slace LADCP file
+name_adcpslave  -> New name for the slave LADCP file
 log_filename    -> Name of the logfile
 
 % Checkbox state (default)
@@ -57,7 +58,7 @@ drive           = m:\
 path_seasoft    = c:\SEASOFT\
 path_dataladcp  = c:\LADCP\
 
-############################################################################_
+############################################################################
 % Disk Organization
 
 # LDEO program location : (drive\nom_mission...)
