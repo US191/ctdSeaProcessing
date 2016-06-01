@@ -11,10 +11,10 @@ Automation pre-processing software for CTD-LADCP
 This Matlab application automate the different steps of the on-board CTD/LADCP processing:
 * Copy data acquisition CTD file to processing path                     
 * Specific CTD SBE Processing (ladcp, codac, std, plt, report, btl)     
-	-ladcp: Specific CTD processing for LADCP processing. 
-	-codac: Data reduction for real-time transmission to Coriolis.
-	-std: Standard processing to export ASCII data.
-	-plt: Plot CTD profile.
+	-ladcp: Specific CTD processing for LADCP processing.   
+	-codac: Data reduction for real-time transmission to Coriolis.   
+	-std: Standard processing to export ASCII data.   
+	-plt: Plot CTD profile.   
 	-report: Generate report CTD file.
 	-btl: Bottle file processing.
 * Copy data acquisition LADCP file to processing path                   
