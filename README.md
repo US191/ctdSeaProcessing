@@ -10,7 +10,13 @@ Automation pre-processing software for CTD-LADCP
 
 This Matlab application automate the different steps of the on-board CTD/LADCP processing:
 * Copy data acquisition CTD file to processing path                     
-* CTD SBE Processing                      
+* Specific CTD SBE Processing (ladcp, codac, std, plt, report, btl)     
+	-ladcp: Specific CTD processing for LADCP processing. 
+	-codac: Data reduction for real-time transmission to Coriolis.
+	-std: Standard processing to export ASCII data.
+	-plt: Plot CTD profile.
+	-report: Generate report CTD file.
+	-btl: Bottle file processing.
 * Copy data acquisition LADCP file to processing path                   
 * ADCP LDEO Processing (https://github.com/jgrelet/ladcp)      
 
@@ -24,10 +30,71 @@ You can get the latest version of these program there:
 
 At the beginning of a cruise:
 
-	- Fill in the 'configuration.ini' file with the cruise information and the directory paths,
+	- Fill in the 'configuration.ini' file with the cruise information and the directory paths (The workspace file will be used for the entire cruise),
+```
+% Mission variables
+name_mission  
+id_mission     
+num_station     -> (if you want to process a specific station)
+filename_ADCPM  -> Name of the output master LADCP file
+filename_ADCPS  -> Name of the output slave LADCP file
+name_adcpmaster -> New name for the master LADCP file
+name_adcpslave  -> New name for the slace LADCP file
+log_filename    -> Name of the logfile
 
-	- The workspace file will be used for the entire cruise,
-	
+% Checkbox state (default)
+copyCTD         = true
+copyADCP        = true
+processCTD      = true
+processADCP     = true
+processPMEL     = false (PMEL process is a specific CTD processing for profile without bottle) 
+
+% Path
+ %Working dir                                      (Path of the data processing directory)
+drive           = m:\
+ %Output CTD/LADCP                                 (Path of the output CTD and LADCP files)
+path_seasoft    = c:\SEASOFT\
+path_dataladcp  = c:\LADCP\
+
+############################################################################
+% Disk Organization
+
+# LDEO program location : (drive\nom_mission...)
+pmatlab         = \data-processing\LADCP\v10.16.2\ (Path of the LDEO program directory)
+
+#(drive\nom_mission...)
+pprocessingCTD  = \data-processing\CTD             (Path of the CTD data processed files)           
+
+#(path_processing...)
+pprocessCTD     = \data\raw\                       (Path for the CTD raw data files before processing)
+
+#(drive\nom_mission...)
+prawCTD         = \data-raw\CTD\                   (Path for the CTD raw data files)
+
+#(path_seasoft\nom_mission...)
+poutputCTD      = \data\                           (Path of the output CTD files)                          
+
+#(drive\nom_mission\pprocessingCTD...)
+pbatch          = \batch\                          (Path of the .batch files for processing)
+
+#(drive\nom_mission\pprocessingCTD...)
+pcodac          = \data\codac\                     (Path for the compressed CTD files for CORIOLIS)
+
+#(drive\nom_mission\pprocessingCTD...)
+preports        = \data\reports\                   (Path for the CTD report files)
+
+#(drive\nom_mission...)
+pprocessingADCP = \data-processing\LADCP\data\     (Path for the LADCP data processed files)   
+
+#(drive\nom_mission...)
+prawADCP        = \data-raw\LADCP\                 (Path for the  LADCP raw data files before processing)               
+
+#(path_dataladcp\nom_mission...)
+poutputADCP     = \download\                       (Path of the output LADCP files)                      
+
+#(path_dataladcp\nom_mission...)
+pmoveADCP       =\data\                            (Path to move the output LADCP files)
+```	
 	- Launch ctdSeaProcessing under Matlab.
 
 
