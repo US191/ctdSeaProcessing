@@ -20,8 +20,8 @@ This Matlab application automate the different steps of the on-board CTD/LADCP p
 Your computer must contain the SeaBird processing software `SBEDataProcessing` (under Windows only) and the data compression program `gzip2`.
 
 You can get the latest version of these program there:
-	[SBEDataProcessing](http://www.seabird.com/software/sbe-data-processing)
-	[gzip2](https://github.com/anandology/gzip2)
+* [SBEDataProcessing](http://www.seabird.com/software/sbe-data-processing)
+* [gzip2](https://github.com/anandology/gzip2)
 	
 
 At the beginning of a cruise:
@@ -32,6 +32,6 @@ At the beginning of a cruise:
 
 	
 _You can launch the program as debug mode with:_
-...
+```
 ctdSeaProcessing('mode','debug')
-...
+```
