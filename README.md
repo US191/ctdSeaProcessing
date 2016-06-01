@@ -9,6 +9,7 @@ Automation pre-processing software for CTD-LADCP
 -----------------------------------------------------------------------
 
 This Matlab application automate the different steps of the on-board CTD/LADCP processing:
+
  -> Copy data acquisition CTD file to processing path                     
  -> CTD SBE Processing                      
  -> Copy data acquisition LADCP file to processing path                   
