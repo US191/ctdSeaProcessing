@@ -30,6 +30,8 @@ At the beginning of a cruise:
 
 	- The workspace file will be used for the entire cruise.
 
+
+
 	
 _You can launch the program as debug mode with:_
 ```
