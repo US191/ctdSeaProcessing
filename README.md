@@ -15,7 +15,7 @@ This Matlab application automate the different steps of the on-board CTD/LADCP p
 	-codac: Data reduction for real-time transmission to Coriolis.   
 	-std: Standard processing to export ASCII data.   
 	-plt: Plot CTD profile.   
-	-report: Generate report CTD file.
+	-report: Generate report CTD file.  
 	-btl: Bottle file processing.
 * Copy data acquisition LADCP file to processing path                   
 * ADCP LDEO Processing (https://github.com/jgrelet/ladcp)      
