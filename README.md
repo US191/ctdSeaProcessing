@@ -65,13 +65,13 @@ path_dataladcp  = c:\LADCP\
 pmatlab         = \data-processing\LADCP\v10.16.2\ (Path of the LDEO program directory)
 
 #(drive\nom_mission...)
-pprocessingCTD  = \data-processing\CTD             (Path of the CTD data processed files)           
+pprocessingCTD  = \data-processing\CTD             (Path for the CTD data processed files)           
 
 #(path_processing...)
-pprocessCTD     = \data\raw\                       (Path for the CTD raw data files before processing)
+pprocessCTD     = \data\raw\                       (Path for the CTD raw-data before processing)
 
 #(drive\nom_mission...)
-prawCTD         = \data-raw\CTD\                   (Path for the CTD raw data files)
+prawCTD         = \data-raw\CTD\                   (Path for the CTD raw-data files)
 
 #(path_seasoft\nom_mission...)
 poutputCTD      = \data\                           (Path of the output CTD files)                          
@@ -89,7 +89,7 @@ preports        = \data\reports\                   (Path for the CTD report file
 pprocessingADCP = \data-processing\LADCP\data\     (Path for the LADCP data processed files)   
 
 #(drive\nom_mission...)
-prawADCP        = \data-raw\LADCP\                 (Path for the  LADCP raw data files before processing)               
+prawADCP        = \data-raw\LADCP\                 (Path for the LADCP raw-data before processing)               
 
 #(path_dataladcp\nom_mission...)
 poutputADCP     = \download\                       (Path of the output LADCP files)                      
