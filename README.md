@@ -33,7 +33,7 @@ At the beginning of a cruise:
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths 
 	  (The workspace file will be used for the entire cruise),
 ```
-% Mission variables
+_% Mission variables
 name_mission  
 id_mission     
 num_station     -> (if you want to process a specific station)
@@ -94,7 +94,7 @@ prawADCP        = \data-raw\LADCP\                 (Path for the  LADCP raw data
 poutputADCP     = \download\                       (Path of the output LADCP files)                      
 
 #(path_dataladcp\nom_mission...)
-pmoveADCP       =\data\                            (Path to move the output LADCP files)
+pmoveADCP       =\data\                            (Path to move the output LADCP files)_
 ```	
 	- Launch ctdSeaProcessing under Matlab.
 
