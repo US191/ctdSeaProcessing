@@ -2,7 +2,6 @@
 Automation pre-processing software for CTD-LADCP
 
  _Preprocessing software for CTD-LADCP_
- 
  _Date: 10/03/16_                                     
  _Autor slave: Pierre Rousselot_                           
  _Jedi master: Jacques Grelet_  
