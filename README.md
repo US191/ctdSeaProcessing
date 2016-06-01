@@ -30,7 +30,8 @@ You can get the latest version of these program there:
 
 At the beginning of a cruise:
 
-	- Fill in the 'configuration.ini' file with the cruise information and the directory paths (The workspace file will be used for the entire cruise),
+	- Fill in the 'configuration.ini' file with the cruise information and the directory paths 
+	  (The workspace file will be used for the entire cruise),
 ```
 % Mission variables
 name_mission  
@@ -47,7 +48,7 @@ copyCTD         = true
 copyADCP        = true
 processCTD      = true
 processADCP     = true
-processPMEL     = false (PMEL process is a specific CTD processing for profile without bottle) 
+processPMEL     = false (PMEL processing is a specific CTD processing for profile without bottle) 
 
 % Path
  %Working dir                                      (Path of the data processing directory)
