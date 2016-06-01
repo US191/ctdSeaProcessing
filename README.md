@@ -15,8 +15,6 @@ This Matlab application automate the different steps of the on-board CTD/LADCP p
 * ADCP LDEO Processing (https://github.com/jgrelet/ladcp)      
 
 -----------------------------------------------------------------------
-(Need Windows for SBEDataProcessing and gzip2 for compressing Codac file)   
-
 Your computer must contain the SeaBird processing software `SBEDataProcessing` (under Windows only) and the data compression program `gzip2`.
 
 You can get the latest version of these program there:
@@ -28,7 +26,9 @@ At the beginning of a cruise:
 
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths,
 
-	- The workspace file will be used for the entire cruise.
+	- The workspace file will be used for the entire cruise,
+	
+	- Launch ctdSeaProcessing under Matlab.
 
 
 
