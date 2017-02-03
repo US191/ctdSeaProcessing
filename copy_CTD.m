@@ -53,7 +53,8 @@ else
         error_logfile (logfile, texterror)
         msgbox({'Problem with CTD raw files !'...
         'Please verify the paths and the filenames'}, 'Error', 'error')
-    
+        return
+        
     end
 
 end
@@ -78,9 +79,9 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')...
     
         write_logfile(logfile, textlog);
         
-        copyfile(fileCtd_hex, p.path_processCTD);
-        copyfile(fileCtd_xmlcon, [p.path_processCTD, p.filenameCTD, '.xmlcon']);
-        copyfile(fileCtd_bl, p.path_processCTD);
+        copyfile(fileRawCtd_hex, p.path_processCTD);
+        copyfile(fileRawCtd_xmlcon, [p.path_processCTD, p.filenameCTD, '.xmlcon']);
+        copyfile(fileRawCtd_bl, p.path_processCTD);
     
     end
 

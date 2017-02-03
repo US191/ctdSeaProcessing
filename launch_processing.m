@@ -7,7 +7,7 @@
 function launch_processing(p)
 
 %% Open log file
-logfile = fopen(p.log_filename, 'wt');
+logfile = fopen(strcat(p.path_config, p.log_filename), 'wt');
 counter = p.copyctd+p.processctd+p.copyadcp+p.processadcp;
 wbar    = waitbar(0, 'CTD-LADCP PreProcessing');
 if p.debug_mode

@@ -19,7 +19,8 @@ if p.debug_mode
 else
     
     write_logfile_CTD (logfile_CTD, textlog);
-
+    fclose('all')
+    
     cd(p.process_matlab)
     addpath(genpath(p.process_matlab));
     addpath(p.drive)

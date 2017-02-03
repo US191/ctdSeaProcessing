@@ -283,6 +283,7 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
             config_filename = fullfile(path, filename);
             p = configuration(config_filename);
             p.config_filename = config_filename;
+            p.path_config = path;
             save(strcat(prefdir, filesep, mfilename, '.mat'), 'p');          
     end
 
