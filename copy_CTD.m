@@ -4,9 +4,12 @@
 % Jedi master: Jacques Grelet                                              %
 % -> Copy CTD acquisition file to processing path                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function copy_CTD(p, logfile)
+function [ind_error] = copy_CTD(p, logfile)
 
 %--------------------------------------------------------------------------
+% error indicative
+ind_error = 0; 
+
 % Copy files to data-raw
 fileCtd_hex    = sprintf('%s', p.path_outputCTD, p.filenameCTD,'.hex');
 fileCtd_xmlcon = sprintf('%s', p.path_outputCTD, p.filenameCTD,'.XMLCON');
@@ -39,6 +42,7 @@ else
   
     texterror = sprintf('>   !!! Problem with CTD raw files, %s, %s and %s do not exist',...
       fileCtd_hex, fileCtd_xmlcon, fileCtd_bl);
+    ind_error = 1;
     
     if p.debug_mode
         
@@ -84,6 +88,7 @@ else
   
     texterror = sprintf('>   !!! Problem for copying CTD raw files %s, %s and %s to %s',...
       fileCtd_hex, fileCtd_xmlcon, fileCtd_bl, p.path_rawCTD);
+    ind_error = 1;
 
     if p.debug_mode
         
@@ -114,6 +119,7 @@ if exist(fileProcessCtd_hex,'file') && exist(fileProcessCtd_xmlcon,'file')...
 else
   
     texterror = sprintf('>   !!! Problem for copying CTD files to %s', p.path_processCTD);
+    ind_error = 1;
 
     if p.debug_mode
     
