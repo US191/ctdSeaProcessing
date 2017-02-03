@@ -46,10 +46,11 @@ function ctdSeaProcessing (varargin)
   end
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% Get configuration file
-  config_filename = 'configuration.ini';
+  config_filename = '';
   if ~ exist(strcat(prefdir,filesep,mfilename,'.mat'), 'file')
-    config_filename = uigetfile('*.ini', 'Select configuration file .ini');
-    p = configuration(config_filename);
+    [filename, path, ~] = uigetfile('*.ini', 'Select configuration file');
+    p.config_filename = fullfile(path, filename);
+    p = configuration(p.config_filename);
   else
     ConfigFile = load(strcat(prefdir,filesep,mfilename,'.mat'));
     p = ConfigFile.p;
@@ -263,14 +264,15 @@ function ctdSeaProcessing (varargin)
 
   % Get configuration file
   function choose_configfile(hObj, ~)
-    p.config_filename = uigetfile('*.ini', 'Select configuration file');
+    [filename, path, ~] = uigetfile('*.ini', 'Select configuration file');
+    p.config_filename = fullfile(path, filename);
     if ~ p.config_filename
       msgbox('The file has not been selected !', 'Warn', 'error');
     else
       res = get(hObj, 'userdata');
-      set(res, 'string', config_filename);
-      p = configuration(config_filename);
-      save(strcat(prefdir,filesep,mfilename,'.mat'));
+      set(res, 'string', p.config_filename);
+      p = configuration(p.config_filename);
+      save(strcat(prefdir,filesep,mfilename,'.mat'), p);
       set_mission_para
     end
   end
