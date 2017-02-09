@@ -4,13 +4,13 @@
 % Jedi master: Jacques Grelet                                              %
 % -> Launch processing                                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function launch_processing(p)
+function launch_processing(cfg)
 
 %% Open log file
-logfile = fopen(strcat(p.path_config, p.log_filename), 'wt');
-counter = p.copyctd+p.processctd+p.copyadcp+p.processadcp;
+logfile = fopen(strcat(cfg.path_config, cfg.log_filename), 'wt');
+counter = cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP+cfg.process_LADCP;
 wbar    = waitbar(0, 'CTD-LADCP PreProcessing');
-if p.debug_mode
+if cfg.debug_mode
     close(wbar)
 end
 
@@ -19,29 +19,29 @@ ind_error = 0;
 
 %% CTD
 % Copy CTD file
-if p.copyctd
+if cfg.copy_CTD
     % Test file exist
-    p.filenameCTD    = sprintf('%s', p.id_mission, p.num_station);
-    fileRawCtd_hex    = sprintf('%s', p.path_rawCTD, p.filenameCTD, '.hex');
+    cfg.filename_CTD    = sprintf('%s', cfg.id_mission, cfg.num_station);
+    fileRawCtd_hex    = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.hex');
     
-    if p.debug_mode
+    if cfg.debug_mode
         
         [ind_error] = copy_CTD(p, logfile);
         
     else
         
-        waitbar(p.copyctd/(counter+1), wbar, 'Copying CTD data');
+        waitbar(cfg.copy_CTD/(counter+1), wbar, 'Copying CTD data');
         
         if exist(fileRawCtd_hex,'file')
             Quest_process = questdlg({'CTD files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
             if strcmp(Quest_process,'Yes')
-                [ind_error] = copy_CTD(p, logfile);
+                [ind_error] = copy_CTD(cfg, logfile);
             else
                 close(wbar);
                 return;
             end
         else
-            [ind_error] = copy_CTD(p, logfile);
+            [ind_error] = copy_CTD(cfg, logfile);
         end
         
     end
@@ -50,101 +50,101 @@ if p.copyctd
 end
 
 % Process CTD file
-if p.processctd
+if cfg.process_CTD
     
-    time_wbar=(p.copyctd+p.processctd)/(counter+1);
+    time_wbar=(cfg.copy_CTD+cfg.process_CTD)/(counter+1);
     
-    if p.debug_mode
+    if cfg.debug_mode
         
-        process_CTD(p, logfile, wbar, time_wbar);
+        process_CTD(cfg, logfile, wbar, time_wbar);
         
     else
         
-        waitbar((p.copyctd+p.processctd)/(counter+1), wbar, 'Processing CTD file');
+        waitbar((cfg.copy_CTD+cfg.process_CTD)/(counter+1), wbar, 'Processing CTD file');
         
         if ind_error
             Quest_process = questdlg({'Some problems occued during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
             if strcmp(Quest_process,'Yes')
-                process_CTD(p, logfile, wbar, time_wbar);
+                process_CTD(cfg, logfile, wbar, time_wbar);
             else
                 close(wbar);
                 return;
             end
         else
-            process_CTD(p, logfile, wbar, time_wbar);
+            process_CTD(cfg, logfile, wbar, time_wbar);
         end
         
-        if ~p.copyadcp && ~p.processadcp
+        if ~cfg.copy_LADCP && ~cfg.process_LADCP
             close(wbar);
         end
         
     end
 end
 
-%% ADCP
+%% LADCP
 
 % error indicative
 ind_error = 0;
 
-% Copy ADCP file
-if p.copyadcp
+% Copy LADCP file
+if cfg.copy_LADCP
     
-    if p.debug_mode
+    if cfg.debug_mode
         
-        copy_ADCP(p, logfile);
+        copy_LADCP(cfg, logfile);
         
     else
         
-        waitbar((p.copyctd+p.processctd+p.copyadcp)/(counter+1), wbar, 'Copying ADCP data');
+        waitbar((cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP)/(counter+1), wbar, 'Copying LADCP data');
         
         % Test file exist
-        newfileADCPMraw = sprintf('%s',p.path_rawADCP,p.newfilename_ADCPM);
-        newfileADCPSraw = sprintf('%s',p.path_rawADCP,p.newfilename_ADCPS);
-        newfileADCPMprocess = sprintf('%s',p.path_processADCP,p.newfilename_ADCPM);
-        newfileADCPSprocess = sprintf('%s',p.path_processADCP,p.newfilename_ADCPS);
+        newfileLADCPMraw = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPM);
+        newfileLADCPSraw = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPS);
+        newfileLADCPMprocess = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPM);
+        newfileLADCPSprocess = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPS);
         
-        if exist(newfileADCPMraw,'file') && exist(newfileADCPSraw,'file')...
-                && exist(newfileADCPMprocess,'file') && exist(newfileADCPSprocess,'file')
-            Quest_process = questdlg({'ADCP files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
+        if exist(newfileLADCPMraw,'file') && exist(newfileLADCPSraw,'file')...
+                && exist(newfileLADCPMprocess,'file') && exist(newfileLADCPSprocess,'file')
+            Quest_process = questdlg({'LADCP files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
             if strcmp(Quest_process,'Yes')
-                [ind_error] = copy_ADCP(p, logfile);
+                [ind_error] = copy_LADCP(cfg, logfile);
             else
                 close(wbar);
                 return;
             end
         else
-            [ind_error] = copy_ADCP(p, logfile);
+            [ind_error] = copy_LADCP(cfg, logfile);
         end
         
-        if ~p.processadcp
+        if ~cfg.process_LADCP
             close(wbar);
         end
         
     end
 end
 
-% Process ADCP file
+% Process LADCP file
 
-if p.processadcp
+if cfg.process_LADCP
     
-    if p.debug_mode
+    if cfg.debug_mode
         
-        process_ADCP(p, logfile);
+        process_LADCP(cfg, logfile);
         
     else
         
         if ind_error
             Quest_process = questdlg({'Some problems occued during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
             if strcmp(Quest_process,'Yes')
-                waitbar(counter/(counter+1), wbar, 'Processing ADCP file');
-                process_ADCP(p, logfile);
+                waitbar(counter/(counter+1), wbar, 'Processing LADCP file');
+                process_LADCP(cfg, logfile);
             else
                 close(wbar);
                 return;
             end
         else
-            waitbar(counter/(counter+1), wbar, 'Processing ADCP file');
-            process_ADCP(p, logfile);
+            waitbar(counter/(counter+1), wbar, 'Processing LADCP file');
+            process_LADCP(cfg, logfile);
         end
     end
     

@@ -1,36 +1,41 @@
-function p = configuration(config_filename)
+function cfg = configuration(config_filename)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PreProcessing Software for SBE CTD-LADCP                                %
 % Autor: Pierre Rousselot / Date: 10/03/16                                %
 % Jedi Master: Jacques Grelet                                             %
 % -> Create configuration file .mat {parametre_(id_mission).mat}          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-p                    = ini2struct(config_filename);
+cfg                         = ini2struct(config_filename);
 
 % create path CTD
-p.filename_CTD       = sprintf('%s', p.id_mission, p.num_station);
-p.path_processingCTD = sprintf('%s', p.drive, p.name_mission, p.pprocessingctd);
-p.path_processCTD    = sprintf('%s', p.path_processingCTD, p.pprocessctd);
-p.path_rawCTD        = sprintf('%s', p.drive, p.name_mission, p.prawctd);
-p.path_outputCTD     = sprintf('%s', p.path_seasoft, p.name_mission, p.poutputctd');
-p.path_batch         = sprintf('%s', p.path_processingCTD, p.pbatch);
-p.path_codac         = sprintf('%s', p.path_processingCTD, p.pcodac);
-p.path_reports       = sprintf('%s', p.path_processingCTD, p.preports);
+cfg.filename_CTD            = sprintf('%s', cfg.id_mission, cfg.num_station);
+cfg.path_output_CTD         = sprintf('%s', cfg.path_SEASOFT, filesep, cfg.name_mission, filesep, cfg.rep_output_CTD);
+cfg.path_raw_CTD            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_CTD);
+cfg.path_processing_CTD     = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_CTD);
+cfg.path_processing_raw_CTD = sprintf('%s', cfg.rep_processing_CTD, filesep, cfg.rep_processing_raw_CTD);
+cfg.path_batch              = sprintf('%s', cfg.rep_processing_CTD, filesep, cfg.rep_batch);
+cfg.path_codac              = sprintf('%s', cfg.rep_processing_CTD, filesep, cfg.rep_codac);
+cfg.path_reports            = sprintf('%s', cfg.rep_processing_CTD, filesep, cfg.rep_reports);
 
 % create path ADCP
-p.path_processADCP   = sprintf('%s', p.drive, p.name_mission, p.pprocessingadcp);
-p.path_rawADCP       = sprintf('%s', p.drive, p.name_mission, p.prawadcp);
-p.path_outputADCP    = sprintf('%s', p.path_dataladcp, p.name_mission, p.poutputadcp);
-p.path_moveADCP      = sprintf('%s', p.path_dataladcp, p.name_mission, p.pmoveadcp);
-p.newfilename_ADCPM  = sprintf('%s', p.name_adcpmaster, p.num_station, '.000'); 
-p.newfilename_ADCPS  = sprintf('%s', p.name_adcpslave, p.num_station, '.000'); 
-p.process_matlab     = sprintf('%s', p.drive, p.name_mission, p.pmatlab, p.name_mission); 
+cfg.newfilename_LADCPM      = sprintf('%s', cfg.name_LADCP_master, cfg.num_station, '.000'); 
+cfg.newfilename_LADCPS      = sprintf('%s', cfg.name_LADCP_slave, cfg.num_station, '.000');
+cfg.path_output_LADCP       = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.rep_output_LADCP, filesep);
+cfg.path_raw_LADCP          = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_LADCP);
+cfg.path_processing_LADCP   = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_LADCP);
+cfg.path_save_LADCP         = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep,  cfg.rep_save_LADCP); 
+cfg.process_LDEO            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_LDEO, filesep, cfg.name_mission); 
 
 % convert to Boolean
-p.copyctd            = str2num(p.copyctd);
-p.copyadcp           = str2num(p.copyadcp);
-p.processctd         = str2num(p.processctd);
-p.processadcp        = str2num(p.processadcp);
-p.processpmel        = str2num(p.processpmel);
+cfg.copy_CTD                = str2num(cfg.copy_CTD);
+cfg.copy_LADCP              = str2num(cfg.copy_LADCP);
+cfg.process_CTD             = str2num(cfg.process_CTD);
+cfg.process_LADCP           = str2num(cfg.process_LADCP);
+cfg.process_PMEL            = str2num(cfg.process_PMEL);
+
+% clear unused variable
+clear cfg.rep_raw_CTD cfg.rep_processing_CTD cfg.rep_raw_LADCP cfg.rep_processing_LADCP cfg.rep_LDEO
+clear cfg.rep_processing_raw_CTD cfg.rep_output_CTD cfg.rep_batch cfg.rep_codac cfg.rep_reports cfg.rep_output_LADCP cfg.rep_save_LADCP
+
 
 end
