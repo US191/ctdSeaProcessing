@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.deploytool" plugin-version="1.0">
-  <configuration target="target.standalone" target-name="Console Application" name="ctdSeaProcesing" location="C:\git\ctdSeaProcessing\compiler\Windows (x86)\R2012b" file="C:\git\ctdSeaProcessing\compiler\Windows (x86)\R2012b\ctdSeaProcesing.prj" build-checksum="4096582886">
-    <param.project.name>C:\git\ctdSeaProcessing\compiler\Windows (x86)\R2012b\ctdSeaProcesing.prj</param.project.name>
+  <configuration target="target.standalone" target-name="Console Application" name="ctdSeaProcessing" location="C:\git\ctdSeaProcessing\compiler\Windows (x64)\R2012b" file="C:\git\ctdSeaProcessing\compiler\Windows (x64)\R2012b\ctdSeaProcessing.prj" build-checksum="3074072339">
+    <param.project.name>C:\git\ctdSeaProcessing\compiler\Windows (x64)\R2012b\ctdSeaProcessing.prj</param.project.name>
     <param.target.type>Console Application</param.target.type>
-    <param.appname>ctdSeaProcesing</param.appname>
-    <param.intermediate>${PROJECT_ROOT}\ctdSeaProcesing\src</param.intermediate>
-    <param.output>${PROJECT_ROOT}\ctdSeaProcesing\distrib</param.output>
+    <param.appname>ctdSeaProcessing</param.appname>
+    <param.intermediate>${PROJECT_ROOT}\ctdSeaProcessing\src</param.intermediate>
+    <param.output>${PROJECT_ROOT}\ctdSeaProcessing\distrib</param.output>
     <param.embed.ctf>true</param.embed.ctf>
     <param.tbx_on_path>
       <item>all</item>
@@ -60,30 +60,18 @@
     <fileset.main>
       <file>C:\git\ctdSeaProcessing\ctdSeaProcessing.m</file>
     </fileset.main>
-    <fileset.resources>
-      <file>C:\git\ctdSeaProcessing\configuration.ini</file>
-      <file>C:\git\ctdSeaProcessing\configuration.m</file>
-      <file>C:\git\ctdSeaProcessing\copy_ADCP.m</file>
-      <file>C:\git\ctdSeaProcessing\copy_CTD.m</file>
-      <file>C:\git\ctdSeaProcessing\help.txt</file>
-      <file>C:\git\ctdSeaProcessing\ini2struct.m</file>
-      <file>C:\git\ctdSeaProcessing\launch_processing.m</file>
-      <file>C:\git\ctdSeaProcessing\process_ADCP.m</file>
-      <file>C:\git\ctdSeaProcessing\process_CTD.m</file>
-      <file>C:\git\ctdSeaProcessing\tools.m</file>
-    </fileset.resources>
+    <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file name="readme.txt" location="${PROJECT_ROOT}\ctdSeaProcesing\distrib" optional="true">C:\git\ctdSeaProcessing\compiler\Windows (x86)\R2012b\ctdSeaProcesing\distrib\readme.txt</file>
-      <file name="ctdSeaProcesing.exe" location="${PROJECT_ROOT}\ctdSeaProcesing\distrib" optional="false">C:\git\ctdSeaProcessing\compiler\Windows (x86)\R2012b\ctdSeaProcesing\distrib\ctdSeaProcesing.exe</file>
+      <file name="readme.txt" location="${PROJECT_ROOT}\ctdSeaProcessing\distrib" optional="true">C:\git\ctdSeaProcessing\compiler\Windows (x64)\R2012b\ctdSeaProcessing\distrib\readme.txt</file>
+      <file name="ctdSeaProcessing.exe" location="${PROJECT_ROOT}\ctdSeaProcessing\distrib" optional="false">C:\git\ctdSeaProcessing\compiler\Windows (x64)\R2012b\ctdSeaProcessing\distrib\ctdSeaProcessing.exe</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files (x86)\MATLAB\R2012b</root>
+      <root>C:\Program Files\MATLAB\R2012b</root>
       <path>
         <directory>C:\Users\jgrelet\Documents\MATLAB</directory>
-        <directory>C:\svn\tsg-qc\trunk</directory>
-        <directory>C:\svn\datagui\tags\V1_0</directory>
+        <directory>C:\svn\datagui\branches\V1_oceansites</directory>
         <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\xmltree</directory>
         <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\xml_toolbox</directory>
         <directory>C:\svn\oceano\trunk</directory>
@@ -92,9 +80,7 @@
         <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\nansuite</directory>
         <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\git_wrapper</directory>
         <directory>C:\svn\oceano\trunk\lib\matlab</directory>
-        <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\snctools\mexcdf\snctools\tests</directory>
-        <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\snctools\mexcdf\mexnc</directory>
-        <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\snctools\mexcdf\snctools</directory>
+        <directory>C:\svn\tsg-qc\trunk</directory>
         <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\matlab_xunit\xunit</directory>
         <directory>C:\svn\ladcp-ldeo\trunk\m</directory>
         <directory>C:\Users\jgrelet\Documents\MATLAB\toolbox\mbed</directory>
@@ -154,6 +140,9 @@
         <directory>${MATLAB_ROOT}\toolbox\matlab\system</directory>
         <directory>${MATLAB_ROOT}\toolbox\matlab\timeseries</directory>
         <directory>${MATLAB_ROOT}\toolbox\matlab\hds</directory>
+        <directory>C:\svn\datagui\tags\V1_0\util</directory>
+        <directory>C:\svn\datagui\tags\V1_0\common</directory>
+        <directory>C:\svn\datagui\tags\V1_0\callback</directory>
       </path>
     </matlab>
     <platform>
@@ -166,9 +155,9 @@
       <linux>false</linux>
       <solaris>false</solaris>
       <osver>6.1</osver>
-      <os32>true</os32>
-      <os64>false</os64>
-      <arch>win32</arch>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
       <matlab>true</matlab>
     </platform>
   </configuration>
