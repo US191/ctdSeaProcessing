@@ -69,7 +69,7 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')...
         && exist(fileRawCtd_bl, 'file')
     
     textlog = sprintf('    %s[.hex, .xmlcon, .bl] from %s to %s',...
-      cfg.filename_CTD, cfg.path_raw_CTD, cfg.path_processing_CTD);
+      cfg.filename_CTD, cfg.path_raw_CTD, cfg.path_processing_raw_CTD);
 
     if cfg.debug_mode
         
@@ -79,9 +79,9 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')...
     
         write_logfile(logfile, textlog);
         
-        copyfile(fileRawCtd_hex, cfg.path_processing_CTD);
-        copyfile(fileRawCtd_xmlcon, [cfg.path_processCTD, cfg.filename_CTD, '.xmlcon']);
-        copyfile(fileRawCtd_bl, cfg.path_processing_CTD);
+        copyfile(fileRawCtd_hex, cfg.path_processing_raw_CTD);
+        copyfile(fileRawCtd_xmlcon, [cfg.path_processing_raw_CTD, cfg.filename_CTD, '.xmlcon']);
+        copyfile(fileRawCtd_bl, cfg.path_processing_raw_CTD);
     
     end
 
@@ -107,9 +107,9 @@ end
 
 %--------------------------------------------------------------------------
 % End of the copy process
-fileProcessCtd_hex    = sprintf('%s', cfg.path_processing_CTD, cfg.filename_CTD, '.hex');
-fileProcessCtd_xmlcon = sprintf('%s', cfg.path_processing_CTD, cfg.filename_CTD, '.xmlcon');
-fileProcessCtd_bl     = sprintf('%s', cfg.path_processing_CTD, cfg.filename_CTD, '.bl');
+fileProcessCtd_hex    = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.hex');
+fileProcessCtd_xmlcon = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.xmlcon');
+fileProcessCtd_bl     = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.bl');
 
 if exist(fileProcessCtd_hex,'file') && exist(fileProcessCtd_xmlcon,'file')...
         && exist(fileProcessCtd_bl,'file')
@@ -119,7 +119,7 @@ if exist(fileProcessCtd_hex,'file') && exist(fileProcessCtd_xmlcon,'file')...
     
 else
   
-    texterror = sprintf('>   !!! Problem for copying CTD files to %s', cfg.path_processing_CTD);
+    texterror = sprintf('>   !!! Problem for copying CTD files to %s', cfg.path_processing_raw_CTD);
     ind_error = 1;
 
     if cfg.debug_mode
