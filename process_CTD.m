@@ -39,7 +39,7 @@ end
     sbe_std        = sprintf('!SBEBatch.exe %sstd.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
     sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
     sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
-    sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_raw_CTD);
+    sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
     codac_file     = sprintf('%s', cfg.path_codac, cfg.filename_CTD, '.cnv');
     compress_codac = sprintf('!bzip2.exe -f %s', codac_file);
     textlog        = sprintf('End of the CTD processing');

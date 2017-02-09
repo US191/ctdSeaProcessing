@@ -22,7 +22,7 @@ if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')...
         && exist(fileCtd_bl,'file')
     
     textlog = sprintf( '    %s[.hex, .XMLCON, .bl] from %s to %s',...
-      cfg.filename_CTD, cfg.path_outputCTD, cfg.path_rawCTD);  
+      cfg.filename_CTD, cfg.path_output_CTD, cfg.path_raw_CTD);  
     
     if cfg.debug_mode
         
