@@ -26,8 +26,9 @@ if cfg.process_PMEL
         
         waitbar(time_wbar, wbar, 'PMEL Processing');
         evalc(sbe_pmel);
+        textlog = sprintf('    End of PMEL Processing');
         write_logfile (logfile, textlog);
-        close(wbar)
+        
         
     end
         

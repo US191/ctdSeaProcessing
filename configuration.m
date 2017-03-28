@@ -15,16 +15,25 @@ cfg.path_processing_CTD     = sprintf('%s', cfg.drive, filesep, cfg.name_mission
 cfg.path_processing_raw_CTD = sprintf('%s', cfg.path_processing_CTD, cfg.rep_processing_raw_CTD, filesep);
 cfg.path_batch              = sprintf('%s', cfg.path_processing_CTD, cfg.rep_batch, filesep);
 cfg.path_codac              = sprintf('%s', cfg.path_processing_CTD, cfg.rep_codac, filesep);
-cfg.path_reports            = sprintf('%s', cfg.path_processing_CTD, cfg.rep_reports, filesep);
+cfg.path_reports            = sprintf('%s', cfg.path_processing_CTD, cfg.rep_reports);
 
 % create path ADCP
-cfg.newfilename_LADCPM      = sprintf('%s', cfg.name_LADCP_master, cfg.num_station, '.000'); 
-cfg.newfilename_LADCPS      = sprintf('%s', cfg.name_LADCP_slave, cfg.num_station, '.000');
+cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', cfg.num_station, '.000'); 
+cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', cfg.num_station, '.000');
 cfg.path_output_LADCP       = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.rep_output_LADCP, filesep);
 cfg.path_raw_LADCP          = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_LADCP, filesep);
 cfg.path_processing_LADCP   = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_LADCP, filesep);
 cfg.path_save_LADCP         = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep,  cfg.rep_save_LADCP, filesep); 
 cfg.process_LDEO            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_LDEO, filesep, cfg.name_mission, filesep); 
+
+% find filename ADCP
+master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'MASTER.TXT'), 'r');
+slave_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'SLAVE.TXT'), 'r');
+M = fscanf(master_file, '%s');
+S = fscanf(slave_file, '%s');
+cfg.filename_LADCPM = [M(strfind(M, 'RN')+2:strfind(M, 'RN')+6),'000.000'];
+cfg.filename_LADCPS = [S(strfind(S, 'RN')+2:strfind(S, 'RN')+6),'000.000'];
+
 
 % convert to Boolean
 cfg.copy_CTD                = str2num(cfg.copy_CTD);

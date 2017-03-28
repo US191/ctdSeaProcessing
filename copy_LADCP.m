@@ -35,8 +35,8 @@ if exist(fileLADCPMoutput,'file') && exist(fileLADCPSoutput,'file')
         
         write_logfile(logfile, textlog);
         
-        copyfile (fileLADCPMoutput, newfileLADCPMoutput);
-        copyfile (fileLADCPSoutput, newfileLADCPSoutput);
+        movefile (fileLADCPMoutput, newfileLADCPMoutput);
+        movefile (fileLADCPSoutput, newfileLADCPSoutput);
     
     end
     
