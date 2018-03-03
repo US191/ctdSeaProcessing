@@ -51,7 +51,9 @@ end
         write_logfile_disp (logfile, sbe_std);
         write_logfile_disp (logfile, sbe_plt);
         write_logfile_disp (logfile, sbe_report);
-        write_logfile_disp (logfile, sbe_btl);
+        if cfg.process_BTL
+            write_logfile_disp (logfile, sbe_btl);
+        end
         write_logfile_disp (logfile, compress_codac);
         write_logfile_disp (logfile, textlog);
         
@@ -90,13 +92,15 @@ end
         evalc(sbe_report);
         textlog = sprintf('    Report File generated');
         write_logfile_disp (logfile, textlog);
-
-        % Bottles .ros processing
-        waitbar(time_wbar,wbar, 'Bottles .ros processing');
-        write_logfile (logfile, sbe_btl);
-        evalc(sbe_btl);
-        textlog = sprintf('    End of the bottles .ros processing');
-        write_logfile_disp (logfile, textlog);
+    
+        if cfg.process_BTL
+            % Bottles .ros processing
+            waitbar(time_wbar,wbar, 'Bottles .ros processing');
+            write_logfile (logfile, sbe_btl);
+            evalc(sbe_btl);
+            textlog = sprintf('    End of the bottles .ros processing');
+            write_logfile_disp (logfile, textlog);
+        end
 
         % Compress file to 5db for Coriolis
         if exist(codac_file, 'file')

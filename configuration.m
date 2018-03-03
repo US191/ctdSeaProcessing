@@ -41,6 +41,7 @@ cfg.copy_LADCP              = str2num(cfg.copy_LADCP);
 cfg.process_CTD             = str2num(cfg.process_CTD);
 cfg.process_LADCP           = str2num(cfg.process_LADCP);
 cfg.process_PMEL            = str2num(cfg.process_PMEL);
+cfg.process_BTL             = str2num(cfg.process_BTL);
 
 % clear unused variable
 clear cfg.rep_raw_CTD cfg.rep_processing_CTD cfg.rep_raw_LADCP cfg.rep_processing_LADCP cfg.rep_LDEO
