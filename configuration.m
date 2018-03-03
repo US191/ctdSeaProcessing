@@ -1,7 +1,7 @@
 function cfg = configuration(config_filename)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PreProcessing Software for SBE CTD-LADCP                                %
-% Autor: Pierre Rousselot / Date: 10/03/16                                %
+% Autor: Pierre Rousselot / Date: 10/03/16    ok                          %
 % Jedi Master: Jacques Grelet                                             %
 % -> Create configuration file .mat {parametre_(id_mission).mat}          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
