@@ -77,7 +77,6 @@ end
 %% Initialization
 cfg.rep_local = fileparts(which(mfilename));
 cfg.debug_mode = false;
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Mission and station parameters
