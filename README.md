@@ -30,7 +30,7 @@ You can get the latest version of these program there:
 
 At the beginning of a cruise:
 
-	- Prepare your .psa files,
+	- Prepare your .psa files (you can use Step-By-Step Mode which process SBEDataProcessing Step-by-Step to parameter .psa files),
 
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths 
 	  (The workspace file will be used for the entire cruise),
@@ -104,7 +104,7 @@ pmoveADCP       =\data\                            (Path to move the output LADC
 
 
 	
-_You can launch the program as debug mode with:_
+You can launch the program as debug mode with:_
 ```
 ctdSeaProcessing('mode','debug')
 ```

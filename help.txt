@@ -17,7 +17,7 @@ You can launch the program as debug mode with: ctdSeaProcessing('mode','debug')
 
 At the beginning of a cruise:
 
-	- Prepare your .psa files,
+	- Prepare your .psa files (you can use Step-By-Step Mode which process SBEDataProcessing Step-by-Step to parameter .psa files),
 
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths,
 

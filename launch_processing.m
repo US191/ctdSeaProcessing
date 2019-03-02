@@ -22,7 +22,7 @@ ind_error = 0;
 if cfg.copy_CTD
     % Test file exist
     cfg.filename_CTD    = sprintf('%s', cfg.id_mission, cfg.num_station);
-    fileRawCtd_hex    = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.hex');
+    fileRawCtd_hex      = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.hex');
     
     if cfg.debug_mode
         

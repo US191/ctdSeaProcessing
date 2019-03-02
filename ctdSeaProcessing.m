@@ -33,7 +33,8 @@ function ctdSeaProcessing (varargin)
 close all; clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Mode
-[debug_mode] = tools(varargin, nargin);
+[debug_mode]    = tools(varargin, nargin);
+stepbystep_mode = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Handle
 fig = figure('Name', 'CTD-LADCP PreProcessing', ...
@@ -44,11 +45,13 @@ fig = figure('Name', 'CTD-LADCP PreProcessing', ...
 
 infogen_menu = uimenu(fig, 'Label', 'General information');
 
-menu_mode = uimenu(infogen_menu, 'Label', 'Mode');
-Debug_Mode = uimenu(menu_mode, 'Label', 'Debug', ...
+menu_mode           = uimenu(infogen_menu, 'Label', 'Mode');
+Debug_Mode          = uimenu(menu_mode, 'Label', 'Debug', ...
     'callback', @DebugMode);
-Normal_Mode = uimenu(menu_mode, 'Label', 'Normal', ...
+Normal_Mode         = uimenu(menu_mode, 'Label', 'Normal', ...
     'callback', @NormalMode, 'Checked', 'on');
+Step_by_Step_Mode   = uimenu(menu_mode, 'Label', 'StepbyStep', ...
+    'callback', @StepbyStepMode);
 uimenu(infogen_menu, 'Label', 'Help', ...
     'callback', @help);
 uimenu(infogen_menu, 'Label', 'Quit', ...
@@ -65,7 +68,9 @@ if debug_mode
     set(fig, 'Name', 'CTD-LADCP PreProcessing --DEBUG MODE--');
     set(Debug_Mode, 'Checked', 'on')
     set(Normal_Mode, 'Checked', 'off')
+    set(Step_by_Step_Mode, 'Checked', 'off')
 end
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Get configuration
 if ~ exist(strcat(prefdir, filesep, mfilename,'.mat'), 'file')
@@ -296,17 +301,31 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
 
 % Debug mode
     function DebugMode(~, ~)
-        debug_mode = true;
+        debug_mode      = true;
+        stepbystep_mode = false;
         set(fig, 'Name', 'CTD-LADCP PreProcessing --DEBUG MODE--');
         set(Debug_Mode, 'Checked', 'on');
         set(Normal_Mode, 'Checked', 'off');
+        set(Step_by_Step_Mode, 'Checked', 'off');
     end
 
 % Normal mode
     function NormalMode(~, ~)
-        debug_mode = false;
+        debug_mode      = false;
+        stepbystep_mode = false;
         set(fig, 'Name', 'CTD-LADCP PreProcessing');
         set(Normal_Mode, 'Checked', 'on');
+        set(Debug_Mode, 'Checked', 'off');
+        set(Step_by_Step_Mode, 'Checked', 'off');
+    end
+
+% Step-by-Step mode
+    function StepbyStepMode(~, ~)
+        debug_mode      = false;
+        stepbystep_mode = true;
+        set(fig, 'Name', 'CTD-LADCP PreProcessing --STEP-BY-STEP MODE--');
+        set(Step_by_Step_Mode, 'Checked', 'on');
+        set(Normal_Mode, 'Checked', 'off');
         set(Debug_Mode, 'Checked', 'off');
     end
 
@@ -373,7 +392,8 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
     function launcher(~, ~)
         % Save workspace
         save(strcat(prefdir, filesep, mfilename, '.mat'), 'cfg');
-        cfg.debug_mode = debug_mode;
+        cfg.debug_mode      = debug_mode;
+        cfg.stepbystep_mode = stepbystep_mode;
         launch_processing(cfg)
     end
 

@@ -10,10 +10,19 @@ function process_CTD(cfg, logfile, wbar, time_wbar)
 disp(' '); disp('CTD SBE PROCESSING'); 
 fprintf(logfile, '\n CTD SBE PROCESSING \n');
 
+% Step bys tep mode
+if cfg.stepbystep_mode
+    cfg.step_arg = '#w';
+    textlog = sprintf('Step by Step mode');
+    write_logfile (logfile, textlog);
+else
+    cfg.step_arg = '';
+end
+
 % PMEL processing 
 if cfg.process_PMEL
     
-    sbe_pmel = sprintf('!SBEBatch.exe %spmel.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
+    sbe_pmel = sprintf('!SBEBatch.exe %spmel.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     textlog = sprintf('    End of PMEL Processing');
 
     if cfg.debug_mode
@@ -35,12 +44,12 @@ if cfg.process_PMEL
 end
 
 
-    sbe_ladcp      = sprintf('!SBEBatch.exe %sladcp.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
-    sbe_codac      = sprintf('!SBEBatch.exe %scodac.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
-    sbe_std        = sprintf('!SBEBatch.exe %sstd.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
-    sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
+    sbe_ladcp      = sprintf('!SBEBatch.exe %sladcp.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    sbe_codac      = sprintf('!SBEBatch.exe %scodac.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    sbe_std        = sprintf('!SBEBatch.exe %sstd.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
-    sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD);
+    sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     codac_file     = sprintf('%s', cfg.path_codac, cfg.filename_CTD, '.cnv');
     compress_codac = sprintf('!bzip2.exe -f %s', codac_file);
     textlog        = sprintf('End of the CTD processing');
