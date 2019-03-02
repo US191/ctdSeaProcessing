@@ -26,7 +26,7 @@ if cfg.copy_CTD
     
     if cfg.debug_mode
         
-        [ind_error] = copy_CTD(p, logfile);
+        [ind_error] = copy_CTD(cfg, logfile);
         
     else
         

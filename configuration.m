@@ -24,7 +24,7 @@ cfg.path_output_LADCP       = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mi
 cfg.path_raw_LADCP          = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_LADCP, filesep);
 cfg.path_processing_LADCP   = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_LADCP, filesep);
 cfg.path_save_LADCP         = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep,  cfg.rep_save_LADCP, filesep); 
-cfg.process_LDEO            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_LDEO, filesep, cfg.name_mission, filesep); 
+cfg.process_LDEO            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_LDEO, filesep); 
 
 % find filename ADCP
 master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'MASTER.TXT'), 'r');
