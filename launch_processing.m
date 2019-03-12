@@ -14,11 +14,11 @@ if cfg.debug_mode
     close(wbar)
 end
 
+%% Copy files
+% Copy CTD file
 % error indicative
 ind_error = 0;
 
-%% CTD
-% Copy CTD file
 if cfg.copy_CTD
     % Test file exist
     cfg.filename_CTD    = sprintf('%s', cfg.id_mission, cfg.num_station);
@@ -44,45 +44,44 @@ if cfg.copy_CTD
             [ind_error] = copy_CTD(cfg, logfile);
         end
         
-    end
-    
+    end   
     
 end
 
-% Process CTD file
-if cfg.process_CTD
-    
-    time_wbar=(cfg.copy_CTD+cfg.process_CTD)/(counter+1);
+% Copy SBE35 file
+% error indicative
+ind_error = 0;
+
+if cfg.copy_SBE35
+    % Test file exist
+    cfg.filename_SBE35    = sprintf('%s', upper(cfg.id_mission), cfg.num_station);
+    fileRawSBE35_hex      = sprintf('%s', cfg.path_raw_SBE35, cfg.filename_SBE35, '.asc');
     
     if cfg.debug_mode
         
-        process_CTD(cfg, logfile, wbar, time_wbar);
+        [ind_error] = copy_SBE35(cfg, logfile);
         
     else
         
-        waitbar((cfg.copy_CTD+cfg.process_CTD)/(counter+1), wbar, 'Processing CTD file');
+        waitbar(cfg.copy_CTD/(counter+1), wbar, 'Copying SBE35 data');
         
-        if ind_error
-            Quest_process = questdlg({'Some problems occued during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
+        if exist(fileRawSBE35_hex,'file')
+            Quest_process = questdlg({'SBE35 files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
             if strcmp(Quest_process,'Yes')
-                process_CTD(cfg, logfile, wbar, time_wbar);
+                [ind_error] = copy_SBE35(cfg, logfile);
             else
                 close(wbar);
                 return;
             end
         else
-            process_CTD(cfg, logfile, wbar, time_wbar);
+            [ind_error] = copy_SBE35(cfg, logfile);
         end
         
-        if ~cfg.copy_LADCP && ~cfg.process_LADCP
-            close(wbar);
-        end
-        
-    end
+    end   
+    
 end
 
-%% LADCP
-
+% LADCP
 % error indicative
 ind_error = 0;
 
@@ -123,8 +122,40 @@ if cfg.copy_LADCP
     end
 end
 
-% Process LADCP file
+%% Process files
+% Process CTD file
+if cfg.process_CTD
+    
+    time_wbar=(cfg.copy_CTD+cfg.process_CTD)/(counter+1);
+    
+    if cfg.debug_mode
+        
+        process_CTD(cfg, logfile, wbar, time_wbar);
+        
+    else
+        
+        waitbar((cfg.copy_CTD+cfg.process_CTD)/(counter+1), wbar, 'Processing CTD file');
+        
+        if ind_error
+            Quest_process = questdlg({'Some problems occued during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
+            if strcmp(Quest_process,'Yes')
+                process_CTD(cfg, logfile, wbar, time_wbar);
+            else
+                close(wbar);
+                return;
+            end
+        else
+            process_CTD(cfg, logfile, wbar, time_wbar);
+        end
+        
+        if ~cfg.copy_LADCP && ~cfg.process_LADCP
+            close(wbar);
+        end
+        
+    end
+end
 
+% Process LADCP file
 if cfg.process_LADCP
     
     if cfg.debug_mode

@@ -88,7 +88,7 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')...
 else
   
     texterror = sprintf('>   !!! Problem for copying CTD raw files %s, %s and %s to %s',...
-      fileCtd_hex, fileCtd_xmlcon, fileCtd_bl, cfg.path_rawCTD);
+      fileCtd_hex, fileCtd_xmlcon, fileCtd_bl, cfg.path_raw_CTD);
     ind_error = 1;
 
     if cfg.debug_mode

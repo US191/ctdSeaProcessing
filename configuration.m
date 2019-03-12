@@ -10,8 +10,11 @@ cfg                         = ini2struct(config_filename);
 % create path CTD
 cfg.filename_CTD            = sprintf('%s', cfg.id_mission, cfg.num_station);
 cfg.path_output_CTD         = sprintf('%s', cfg.path_SEASOFT, filesep, cfg.name_mission, filesep, cfg.rep_output_CTD, filesep);
+cfg.path_output_SBE35       = sprintf('%s', cfg.path_SEASOFT, filesep, cfg.name_mission, filesep, cfg.rep_output_SBE35, filesep);
 cfg.path_raw_CTD            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_CTD, filesep);
 cfg.path_processing_CTD     = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_CTD, filesep);
+cfg.path_raw_SBE35          = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_SBE35, filesep);
+cfg.path_processing_SBE35   = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_SBE35, filesep);
 cfg.path_processing_raw_CTD = sprintf('%s', cfg.path_processing_CTD, cfg.rep_processing_raw_CTD, filesep);
 cfg.path_batch              = sprintf('%s', cfg.path_processing_CTD, cfg.rep_batch, filesep);
 cfg.path_codac              = sprintf('%s', cfg.path_processing_CTD, cfg.rep_codac, filesep);
@@ -37,6 +40,7 @@ cfg.filename_LADCPS = [S(strfind(S, 'RN')+2:strfind(S, 'RN')+6),'000.000'];
 
 % convert to Boolean
 cfg.copy_CTD                = str2num(cfg.copy_CTD);
+cfg.copy_SBE35              = str2num(cfg.copy_SBE35);
 cfg.copy_LADCP              = str2num(cfg.copy_LADCP);
 cfg.process_CTD             = str2num(cfg.process_CTD);
 cfg.process_LADCP           = str2num(cfg.process_LADCP);
