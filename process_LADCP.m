@@ -22,11 +22,11 @@ if cfg.debug_mode
 else
     
     write_logfile_CTD (logfile_CTD, textlog);
-    fclose('all')
+    fclose('all');
     
-    cd(cfg.process_LDEO)
+    cd(cfg.process_LDEO);
     addpath(genpath(cfg.process_LDEO));
-    addpath(cfg.drive)
+    addpath(cfg.drive);
     set(0,'defaultsurfaceedgecolor', 'none');
     set(0,'defaultfigurerenderer', 'painter');
 
