@@ -9,6 +9,9 @@ close all
 
 %% LADCP file LDEO processing
 % Initialisation
+disp(' '); disp('LADCP PROCESSING'); 
+fprintf(logfile, '\n LADCP PROCESSING \n');
+
 disp(' '); textlog = sprintf('INITIALIZING LDEO LADCP PROCESSING');
 logfile_CTD = logfile; %Resolve conflict LDEO Processing/ctdSeaProcessing
 
@@ -29,7 +32,7 @@ else
 
     % Processing
     disp('LDEO LADCP Processing');
-    process_cast(cfg.num_station)
+    process_cast(cfg.num_station);
 
 end
 

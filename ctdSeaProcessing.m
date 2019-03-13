@@ -87,7 +87,7 @@ cfg.debug_mode = false;
 % panel_geninf = uipanel('parent', panel_infogen, ...
 %     'title', 'General information', ...
 %     'units', 'normalized', ...
-%     'position', [0.05 0.7 0.9 0.3]);
+%     'position', [0.05 0.7 0.9 0.2]);
   
 %% Mission and station parameters
 % Mission name
@@ -409,11 +409,13 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
 
 % Launch processing
     function launcher(~, ~)
-        % Save workspace
-        save(strcat(prefdir, filesep, mfilename, '.mat'), 'cfg');
         cfg.debug_mode      = debug_mode;
         cfg.stepbystep_mode = stepbystep_mode;
         launch_processing(cfg)
+        % Save workspace
+        cfg.copy_SBE35    = false;
+        cfg.process_PMEL  = false;
+        save(strcat(prefdir, filesep, mfilename, '.mat'), 'cfg');
     end
 
 end

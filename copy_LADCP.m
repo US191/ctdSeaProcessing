@@ -16,9 +16,6 @@ fileLADCPSoutput = sprintf('%s', cfg.path_output_LADCP, cfg.filename_LADCPS);
 newfileLADCPMoutput = sprintf('%s', cfg.path_save_LADCP, cfg.newfilename_LADCPM);
 newfileLADCPSoutput = sprintf('%s', cfg.path_save_LADCP, cfg.newfilename_LADCPS);
 
-disp(' '); disp('LADCP PROCESSING'); 
-fprintf(logfile, '\n LADCP PROCESSING \n');
-
 if exist(fileLADCPMoutput,'file') && exist(fileLADCPSoutput,'file')
 
     textlog = sprintf('COPY LADCP RAW FILES');
