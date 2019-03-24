@@ -35,6 +35,7 @@ close all; clc;
 %% Mode
 [debug_mode]    = tools(varargin, nargin);
 stepbystep_mode = false;
+cfg.copy_sbe35  = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Handle
 fig = figure('Name', 'CTD-LADCP PreProcessing', ...
