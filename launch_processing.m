@@ -8,15 +8,10 @@ function launch_processing(cfg)
 
 %% Open log file
 logfile = fopen(strcat(cfg.path_config, cfg.log_filename), 'wt');
-counter = cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP+cfg.process_LADCP;
-wbar    = waitbar(0, 'CTD-LADCP PreProcessing');
-if cfg.debug_mode
-    close(wbar)
-end
 
 %% Option for multiple files
-if contains(cfg.num_station,'-')
-    ind_sep         = findstr(cfg.num_station,'-');
+if strfind(cfg.num_station,'-')
+    ind_sep         = strfind(cfg.num_station,'-');
     start           = str2num(cfg.num_station(1:ind_sep-1));
     last            = str2num(cfg.num_station(ind_sep+1:end));
     num_station     = start:last;
@@ -29,6 +24,12 @@ else
 end
 
     function process(cfg)
+        
+        counter = cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP+cfg.process_LADCP;
+        wbar    = waitbar(0, 'CTD-LADCP PreProcessing');
+        if cfg.debug_mode
+            close(wbar)
+        end
         %% Copy files
         % Copy CTD file
         % error indicative
