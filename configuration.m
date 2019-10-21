@@ -29,25 +29,27 @@ cfg.path_processing_LADCP   = sprintf('%s', cfg.drive, filesep, cfg.name_mission
 cfg.path_save_LADCP         = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep,  cfg.rep_save_LADCP, filesep); 
 cfg.process_LDEO            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_LDEO, filesep); 
 
-% find filename ADCP
-master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'MASTER.TXT'), 'r');
-slave_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'SLAVE.TXT'), 'r');
-M = fscanf(master_file, '%s');
-S = fscanf(slave_file, '%s');
-cfg.filename_LADCPM = [M(strfind(M, 'RN')+2:strfind(M, 'RN')+6),'000.000'];
-cfg.filename_LADCPS = [S(strfind(S, 'RN')+2:strfind(S, 'RN')+6),'000.000'];
-
-
 % convert to Boolean
 cfg.copy_CTD                = str2num(cfg.copy_CTD);
 cfg.copy_LADCP              = str2num(cfg.copy_LADCP);
 cfg.process_CTD             = str2num(cfg.process_CTD);
 cfg.process_LADCP           = str2num(cfg.process_LADCP);
+cfg.process_PMEL            = str2num(cfg.process_PMEL);
 cfg.process_BTL             = str2num(cfg.process_BTL);
 
+% find filename ADCP
+if cfg.process_LADCP
+  master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'MASTER.TXT'), 'r');
+  slave_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'SLAVE.TXT'), 'r');
+  M = fscanf(master_file, '%s');
+  S = fscanf(slave_file, '%s');
+  cfg.filename_LADCPM = [M(strfind(M, 'RN')+2:strfind(M, 'RN')+6),'000.000'];
+  cfg.filename_LADCPS = [S(strfind(S, 'RN')+2:strfind(S, 'RN')+6),'000.000'];
+end
+
 % clear unused variable
-clear cfg.rep_raw_CTD cfg.rep_processing_CTD cfg.rep_raw_LADCP cfg.rep_processing_LADCP cfg.rep_LDEO
-clear cfg.rep_processing_raw_CTD cfg.rep_output_CTD cfg.rep_batch cfg.rep_codac cfg.rep_reports cfg.rep_output_LADCP cfg.rep_save_LADCP
+%clear cfg.rep_raw_CTD cfg.rep_processing_CTD cfg.rep_raw_LADCP cfg.rep_processing_LADCP cfg.rep_LDEO
+%clear cfg.rep_processing_raw_CTD cfg.rep_output_CTD cfg.rep_batch cfg.rep_codac cfg.rep_reports cfg.rep_output_LADCP cfg.rep_save_LADCP
 
 
 end
