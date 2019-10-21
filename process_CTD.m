@@ -43,15 +43,20 @@ if cfg.process_PMEL
         
 end
 
-
-    sbe_ladcp      = sprintf('!SBEBatch.exe %sladcp.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
-    sbe_codac      = sprintf('!SBEBatch.exe %scodac.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    if cfg.process_ladcp
+        sbe_ladcp      = sprintf('!SBEBatch.exe %sladcp.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    end
+    if cfg.create_CODAC
+        sbe_codac      = sprintf('!SBEBatch.exe %scodac.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    end
     sbe_std        = sprintf('!SBEBatch.exe %sstd.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
     sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
-    codac_file     = sprintf('%s', cfg.path_codac, cfg.filename_CTD, '.cnv');
-    compress_codac = sprintf('!bzip2.exe -f %s', codac_file);
+    if cfg.create_CODAC
+        codac_file     = sprintf('%s', cfg.path_codac, cfg.filename_CTD, '.cnv');
+        compress_codac = sprintf('!bzip2.exe -f %s', codac_file);
+    end
     textlog        = sprintf('End of the CTD processing');
 
     if cfg.debug_mode
@@ -68,18 +73,22 @@ end
         
     else
         % Convert to cnv ascii for ladcp files
-        waitbar(time_wbar,wbar, 'Convert to cnv ascii for ladcp files');
-        write_logfile (logfile, sbe_ladcp);
-        evalc(sbe_ladcp);
-        textlog = sprintf('    End of convertion to cnv ascii for ladcp files');
-        write_logfile_disp (logfile, textlog);
+        if cfg.process_ladcp
+            waitbar(time_wbar,wbar, 'Convert to cnv ascii for ladcp files');
+            write_logfile (logfile, sbe_ladcp);
+            evalc(sbe_ladcp);
+            textlog = sprintf('    End of convertion to cnv ascii for ladcp files');
+            write_logfile_disp (logfile, textlog);
+        end
 
         % Codac Processing
-        waitbar(time_wbar,wbar, 'Codac Processing');
-        write_logfile (logfile, sbe_codac);
-        evalc(sbe_codac);
-        textlog = sprintf('    End of the Codac Processing');
-        write_logfile_disp (logfile, textlog);
+        if cfg.create_CODAC
+            waitbar(time_wbar,wbar, 'Codac Processing');
+            write_logfile (logfile, sbe_codac);
+            evalc(sbe_codac);
+            textlog = sprintf('    End of the Codac Processing');
+            write_logfile_disp (logfile, textlog);
+        end
 
         % SBE Processing
         waitbar(time_wbar,wbar, 'SBE Processing');
@@ -112,16 +121,18 @@ end
         end
 
         % Compress file to 5db for Coriolis
-        if exist(codac_file, 'file')
-            waitbar(time_wbar, wbar, 'Compressing file at 5db for Coriolis');
-            write_logfile (logfile, compress_codac);
-            evalc(compress_codac);
-            textlog = sprintf('    End of the file compressing for Coriolis');
-            write_logfile_disp (logfile, textlog); 
-        else
-            msgbox('Codac file do not exist !', 'Error', 'error')
-            textlog = sprintf('>   !!! Problem for compressing Codac file !');
-            write_logfile_disp (logfile, textlog);
+        if cfg.create_CODAC
+            if exist(codac_file, 'file')
+                waitbar(time_wbar, wbar, 'Compressing file at 5db for Coriolis');
+                write_logfile (logfile, compress_codac);
+                evalc(compress_codac);
+                textlog = sprintf('    End of the file compressing for Coriolis');
+                write_logfile_disp (logfile, textlog);
+            else
+                msgbox('Codac file do not exist !', 'Error', 'error')
+                textlog = sprintf('>   !!! Problem for compressing Codac file !');
+                write_logfile_disp (logfile, textlog);
+            end
         end
         
         write_logfile(logfile, textlog);

@@ -31,11 +31,12 @@ cfg.process_LDEO            = sprintf('%s', cfg.drive, filesep, cfg.name_mission
 
 % convert to Boolean
 cfg.copy_CTD                = str2num(cfg.copy_CTD);
-cfg.copy_SBE35              = str2num(cfg.copy_sbe35);
+cfg.copy_SBE35              = str2num(cfg.copy_SBE35);
 cfg.copy_LADCP              = str2num(cfg.copy_LADCP);
 cfg.process_CTD             = str2num(cfg.process_CTD);
 cfg.process_LADCP           = str2num(cfg.process_LADCP);
 cfg.process_PMEL            = str2num(cfg.process_PMEL);
+cfg.create_CODAC            = str2num(cfg.create_CODAC);
 cfg.process_BTL             = str2num(cfg.process_BTL);
 
 % find filename LADCP
