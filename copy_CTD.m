@@ -109,9 +109,7 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')
         copyfile(fileRawCtd_hex, cfg.path_processing_raw_CTD);
         copyfile(fileRawCtd_xmlcon, [cfg.path_processing_raw_CTD, cfg.filename_CTD, '.xmlcon']);
         if cfg.process_BTL
-            copyfile(fileRawCtd_bl, cfg.path_processing_raw_CTD);
-        else
-            msgbox({'You have to take some sample for good measurements !'}, 'Warning', 'warning')            
+            copyfile(fileRawCtd_bl, cfg.path_processing_raw_CTD);     
         end
     
     end
