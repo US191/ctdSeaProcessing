@@ -13,16 +13,25 @@ ind_error = 0;
 % Copy files to data-raw
 fileCtd_hex    = sprintf('%s', cfg.path_output_CTD, cfg.filename_CTD,'.hex');
 fileCtd_xmlcon = sprintf('%s', cfg.path_output_CTD, cfg.filename_CTD,'.XMLCON');
-fileCtd_bl     = sprintf('%s', cfg.path_output_CTD, cfg.filename_CTD,'.bl');
+if cfg.process_BTL
+    fileCtd_bl     = sprintf('%s', cfg.path_output_CTD, cfg.filename_CTD,'.bl');
+    if ~exist(fileCtd_bl,'file')
+        fileCtd_bl     = sprintf('%s', cfg.path_output_CTD, cfg.filename_CTD,'.afm');
+    end
+end
 
 textlog = sprintf( 'COPY CTD RAW FILES');
 write_logfile(logfile, textlog);
 
-if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')...
-        && exist(fileCtd_bl,'file')
+if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')
     
-    textlog = sprintf( '    %s[.hex, .XMLCON, .bl] from %s to %s',...
-      cfg.filename_CTD, cfg.path_output_CTD, cfg.path_raw_CTD);  
+    if exist(fileCtd_bl,'file')
+        textlog = sprintf( '    %s[.hex, .XMLCON, .bl] from %s to %s',...
+            cfg.filename_CTD, cfg.path_output_CTD, cfg.path_raw_CTD); 
+    else
+        textlog = sprintf( '    %s[.hex, .XMLCON] from %s to %s',...
+            cfg.filename_CTD, cfg.path_output_CTD, cfg.path_raw_CTD);         
+    end
     
     if cfg.debug_mode
         
@@ -34,7 +43,11 @@ if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')...
     
         copyfile(fileCtd_hex, cfg.path_raw_CTD);
         copyfile(fileCtd_xmlcon, [cfg.path_raw_CTD, cfg.filename_CTD, '.xmlcon']);
-        copyfile(fileCtd_bl, cfg.path_raw_CTD);
+        if exist(fileCtd_bl,'file')
+            copyfile(fileCtd_bl, cfg.path_raw_CTD);
+        else
+            msgbox({'You have to take some sample for good measurements !'}, 'Warning', 'warning')            
+        end
     
     end    
         
@@ -64,12 +77,22 @@ end
 fileRawCtd_hex    = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.hex');
 fileRawCtd_xmlcon = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.xmlcon');
 fileRawCtd_bl     = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.bl');
+if cfg.process_BTL
+    if ~exist(fileRawCtd_bl, 'file')
+        fileRawCtd_bl     = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.afm');
+        
+    end
+end
 
-if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')...
-        && exist(fileRawCtd_bl, 'file')
+if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')
     
-    textlog = sprintf('    %s[.hex, .xmlcon, .bl] from %s to %s',...
-      cfg.filename_CTD, cfg.path_raw_CTD, cfg.path_processing_raw_CTD);
+    if exist(fileRawCtd_bl, 'file')
+        textlog = sprintf('    %s[.hex, .xmlcon, .bl] from %s to %s',...
+            cfg.filename_CTD, cfg.path_raw_CTD, cfg.path_processing_raw_CTD);
+    else
+        textlog = sprintf('    %s[.hex, .xmlcon] from %s to %s',...
+            cfg.filename_CTD, cfg.path_raw_CTD, cfg.path_processing_raw_CTD);
+    end
 
     if cfg.debug_mode
         
@@ -81,7 +104,11 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')...
         
         copyfile(fileRawCtd_hex, cfg.path_processing_raw_CTD);
         copyfile(fileRawCtd_xmlcon, [cfg.path_processing_raw_CTD, cfg.filename_CTD, '.xmlcon']);
-        copyfile(fileRawCtd_bl, cfg.path_processing_raw_CTD);
+        if exist(fileRawCtd_bl, 'file')
+            copyfile(fileRawCtd_bl, cfg.path_processing_raw_CTD);
+        else
+            msgbox({'You have to take some sample for good measurements !'}, 'Warning', 'warning')            
+        end
     
     end
 
@@ -110,9 +137,11 @@ end
 fileProcessCtd_hex    = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.hex');
 fileProcessCtd_xmlcon = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.xmlcon');
 fileProcessCtd_bl     = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.bl');
+if ~exist(fileProcessCtd_bl,'file')
+    fileProcessCtd_bl     = sprintf('%s', cfg.path_processing_raw_CTD, cfg.filename_CTD, '.afm');
+end
 
-if exist(fileProcessCtd_hex,'file') && exist(fileProcessCtd_xmlcon,'file')...
-        && exist(fileProcessCtd_bl,'file')
+if exist(fileProcessCtd_hex,'file') && exist(fileProcessCtd_xmlcon,'file')
      
     textlog = sprintf('END OF CTD COPY PROCESS');  
     write_logfile (logfile, textlog);    
