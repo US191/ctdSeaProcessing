@@ -5,7 +5,7 @@
 % -> Copy CTD acquisition file to processing path                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [ind_error] = copy_CTD(cfg, logfile)
-
+@ new test on working direc 
 %--------------------------------------------------------------------------
 % error indicative
 ind_error = 0; 
