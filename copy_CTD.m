@@ -25,7 +25,7 @@ write_logfile(logfile, textlog);
 
 if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')
     
-    if exist(fileCtd_bl,'file')
+    if cfg.process_BTL
         textlog = sprintf( '    %s[.hex, .XMLCON, .bl] from %s to %s',...
             cfg.filename_CTD, cfg.path_output_CTD, cfg.path_raw_CTD); 
     else
@@ -43,7 +43,7 @@ if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')
     
         copyfile(fileCtd_hex, cfg.path_raw_CTD);
         copyfile(fileCtd_xmlcon, [cfg.path_raw_CTD, cfg.filename_CTD, '.xmlcon']);
-        if exist(fileCtd_bl,'file')
+        if cfg.process_BTL
             copyfile(fileCtd_bl, cfg.path_raw_CTD);
         else
             msgbox({'You have to take some sample for good measurements !'}, 'Warning', 'warning')            
@@ -86,7 +86,7 @@ end
 
 if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')
     
-    if exist(fileRawCtd_bl, 'file')
+    if cfg.process_BTL
         textlog = sprintf('    %s[.hex, .xmlcon, .bl] from %s to %s',...
             cfg.filename_CTD, cfg.path_raw_CTD, cfg.path_processing_raw_CTD);
     else
@@ -104,7 +104,7 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')
         
         copyfile(fileRawCtd_hex, cfg.path_processing_raw_CTD);
         copyfile(fileRawCtd_xmlcon, [cfg.path_processing_raw_CTD, cfg.filename_CTD, '.xmlcon']);
-        if exist(fileRawCtd_bl, 'file')
+        if cfg.process_BTL
             copyfile(fileRawCtd_bl, cfg.path_processing_raw_CTD);
         else
             msgbox({'You have to take some sample for good measurements !'}, 'Warning', 'warning')            
