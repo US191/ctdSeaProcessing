@@ -5,7 +5,7 @@
 % -> Copy CTD acquisition file to processing path                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [ind_error] = copy_CTD(cfg, logfile)
-% Test GitHub software
+
 %--------------------------------------------------------------------------
 % error indicative
 ind_error = 0; 
@@ -52,9 +52,13 @@ if exist(fileCtd_hex,'file') && exist(fileCtd_xmlcon,'file')
     end    
         
 else
-  
-    texterror = sprintf('>   !!! Problem with CTD raw files, %s, %s and %s do not exist',...
-      fileCtd_hex, fileCtd_xmlcon, fileCtd_bl);
+    if cfg.process_BTL
+        texterror = sprintf('>   !!! Problem with CTD raw files, %s, %s and %s do not exist',...
+            fileCtd_hex, fileCtd_xmlcon, fileCtd_bl);
+    else
+        texterror = sprintf('>   !!! Problem with CTD raw files, %s and %s do not exist',...
+            fileCtd_hex, fileCtd_xmlcon);        
+    end
     ind_error = 1;
     
     if cfg.debug_mode
@@ -113,9 +117,13 @@ if exist(fileRawCtd_hex, 'file') && exist(fileRawCtd_xmlcon, 'file')
     end
 
 else
-  
-    texterror = sprintf('>   !!! Problem for copying CTD raw files %s, %s and %s to %s',...
-      fileCtd_hex, fileCtd_xmlcon, fileCtd_bl, cfg.path_raw_CTD);
+    if cfg.process_BTL
+        texterror = sprintf('>   !!! Problem for copying CTD raw files %s, %s and %s to %s',...
+            fileCtd_hex, fileCtd_xmlcon, fileCtd_bl, cfg.path_raw_CTD);
+    else
+        texterror = sprintf('>   !!! Problem for copying CTD raw files %s and %s to %s',...
+            fileCtd_hex, fileCtd_xmlcon, cfg.path_raw_CTD);
+    end
     ind_error = 1;
 
     if cfg.debug_mode
