@@ -43,13 +43,15 @@ if cfg.process_PMEL
         
 end
 
-    if cfg.process_ladcp
+    if cfg.process_LADCP
         sbe_ladcp      = sprintf('!SBEBatch.exe %sladcp.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     end
-    if cfg.create_CODAC
-        sbe_codac      = sprintf('!SBEBatch.exe %scodac.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    sbe_codac      = sprintf('!SBEBatch.exe %scodac.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    if cfg.process_BTL
+        sbe_std        = sprintf('!SBEBatch.exe %sstd.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+    else
+        sbe_std        = sprintf('!SBEBatch.exe %sstd_wobottle.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     end
-    sbe_std        = sprintf('!SBEBatch.exe %sstd.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
     sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
@@ -60,7 +62,9 @@ end
     textlog        = sprintf('End of the CTD processing');
 
     if cfg.debug_mode
-        write_logfile_disp (logfile, sbe_ladcp);
+        if cfg.process_LADCP
+            write_logfile_disp (logfile, sbe_ladcp);
+        end
         write_logfile_disp (logfile, sbe_codac);
         write_logfile_disp (logfile, sbe_std);
         write_logfile_disp (logfile, sbe_plt);
@@ -73,7 +77,7 @@ end
         
     else
         % Convert to cnv ascii for ladcp files
-        if cfg.process_ladcp
+        if cfg.process_LADCP
             waitbar(time_wbar,wbar, 'Convert to cnv ascii for ladcp files');
             write_logfile (logfile, sbe_ladcp);
             evalc(sbe_ladcp);
