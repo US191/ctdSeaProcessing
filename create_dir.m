@@ -1,11 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Create tree
+% Create tree                                                             %
+% Minimal directories needed for the processing                           %
+% Autor: Pierre Rousselot / Date: 23/10/19                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Variables
 external_drive_name  = 'e:'; % normally this is the server on French vessels
 acquisition_computer = 'c:'; % "CTD" computer
 name_mission         = 'SOLSTICE-CR062'; % CTD data must either get saved directly into this folder (by SEASAVE) or copied across before processing starts
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Create directories
 mkdir(acquisition_computer, 'SEASOFT');
 mkdir([acquisition_computer filesep 'SEASOFT'], name_mission);
