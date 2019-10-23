@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translate >
+  <Version value="7.26.7.129" />
+  <ServerName value="Translate" />
+  <InputDir value="e:\SOLSTICE-CR062\data-processing\CTD\data\cnv" />
+  <InputFileArray size="1" GrowBy="-1" >
+    <ArrayItem index="0" value="cr062003.cnv" />
+  </InputFileArray>
+  <OutputDir value="e:\SOLSTICE-CR062\data-processing\CTD\data\cnv" />
+  <NameAppend value="" />
+  <OutputFile value="CR062003" />
+  <LastProcessed value="0" />
+  <Translation value="0" high="2" low="0" initialValue="0" />
+</Translate>
