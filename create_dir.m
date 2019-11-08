@@ -38,6 +38,25 @@ mkdir([external_drive_name filesep name_mission], 'data-processing');
         mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'plots' ], 'upcast');
         mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'plots' ], 'fluos');
 
+mkdir([external_drive_name filesep name_mission], 'data-adjusted');
+    mkdir([external_drive_name filesep name_mission filesep 'data-processing'], 'CTD');
+        
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD'], 'batch');
+        
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD'], 'data');
+            mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'data'], 'raw');
+            mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'data'], 'reports');
+            mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep , 'data'], 'asc');
+            mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep , 'data'], 'btl');
+            mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep , 'data'], 'cnv');
+            mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep , 'data'], 'tmp');
 
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD'], 'psa');
+
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' ], 'plots');
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'plots' ], 'downcast');
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'plots' ], 'TS');
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'plots' ], 'upcast');
+        mkdir([external_drive_name filesep name_mission filesep 'data-processing' filesep 'CTD' filesep 'plots' ], 'fluos');
 
 
