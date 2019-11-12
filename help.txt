@@ -19,6 +19,10 @@ At the beginning of a cruise:
 
 	- Prepare your .psa files (you can use Step-By-Step Mode which process SBEDataProcessing Step-by-Step to parameter .psa files),
 
+	- Prepare your .batch files,
+
+	- Copy you .psa files and .batch files <cruise>/data-processing/CTD/psa and <cruise>/data-processing/CTD/batch, 
+
 	- Fill in the 'configuration.ini' file with the cruise information and the directory paths,
 
 	- The workspace file will be used for the entire cruise.
