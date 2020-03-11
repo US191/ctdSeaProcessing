@@ -125,11 +125,15 @@ end
                 
                 waitbar((cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP)/(counter+1), wbar, 'Copying LADCP data');
                 
+                % New file name
+                cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', cfg.num_station, '.000'); 
+                cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', cfg.num_station, '.000');
+                
                 % Test file exist
-                newfileLADCPMraw = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPM);
-                newfileLADCPSraw = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPS);
-                newfileLADCPMprocess = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPM);
-                newfileLADCPSprocess = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPS);
+                newfileLADCPMraw      = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPM);
+                newfileLADCPSraw      = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPS);
+                newfileLADCPMprocess  = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPM);
+                newfileLADCPSprocess  = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPS);
                 
                 if exist(newfileLADCPMraw,'file') && exist(newfileLADCPSraw,'file')...
                         && exist(newfileLADCPMprocess,'file') && exist(newfileLADCPSprocess,'file')

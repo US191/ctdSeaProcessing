@@ -11,8 +11,8 @@ function [ind_error] = copy_LADCP(cfg, logfile)
 ind_error = 0; 
 
 % Copy LADCP files 
-fileLADCPMoutput = sprintf('%s', cfg.path_output_LADCP, cfg.filename_LADCPM);
-fileLADCPSoutput = sprintf('%s', cfg.path_output_LADCP, cfg.filename_LADCPS);
+fileLADCPMoutput    = sprintf('%s', cfg.path_output_LADCP, cfg.filename_LADCPM);
+fileLADCPSoutput    = sprintf('%s', cfg.path_output_LADCP, cfg.filename_LADCPS);
 newfileLADCPMoutput = sprintf('%s', cfg.path_save_LADCP, cfg.newfilename_LADCPM);
 newfileLADCPSoutput = sprintf('%s', cfg.path_save_LADCP, cfg.newfilename_LADCPS);
 
