@@ -16,10 +16,11 @@ if strfind(cfg.num_station,'-')
     last            = str2num(cfg.num_station(ind_sep+1:end));
     num_station     = start:last;
     for ii = 1 : length(num_station)
-        cfg.num_station = num2str(num_station(ii), '%3.3d');
+        cfg.num_station = num2str(num_station(ii), '%03d');
         process(cfg)
     end
 else
+    cfg.num_station = num2str(str2double(cfg.num_station),'%03d');
     process(cfg)
 end
 
