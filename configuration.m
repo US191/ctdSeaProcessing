@@ -23,6 +23,7 @@ cfg.path_reports            = sprintf('%s', cfg.path_processing_CTD, cfg.rep_rep
 % create path ADCP
 cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', num2str(str2double(cfg.num_station),'%03d'), '.000'); 
 cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', num2str(str2double(cfg.num_station),'%03d'), '.000');
+cfg.path_conf_LADCP         = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.rep_conf_LADCP, filesep);
 cfg.path_output_LADCP       = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.rep_output_LADCP, filesep);
 cfg.path_raw_LADCP          = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_LADCP, filesep);
 cfg.path_processing_LADCP   = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_LADCP, filesep);
@@ -41,15 +42,18 @@ cfg.process_BTL             = str2num(cfg.process_BTL);
 
 % find filename LADCP
 if cfg.process_LADCP
-  master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'MASTER.TXT'), 'r');
-  slave_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, 'SLAVE.TXT'), 'r');
+  master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.master_ladcpname), 'r');
+  slave_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.slave_ladcpname), 'r');
   if master_file ~= -1 || slave_file ~= -1
       M = fscanf(master_file, '%s');
       S = fscanf(slave_file, '%s');
       cfg.filename_LADCPM = [M(strfind(M, 'RN')+2:strfind(M, 'RN')+6),'000.000'];
       cfg.filename_LADCPS = [S(strfind(S, 'RN')+2:strfind(S, 'RN')+6),'000.000'];
   else
-      msgbox('MASTER.TXT & SLAVE.TXT files doesn''t exist ! Are you sure you want to process LADCP files?', 'Warn', 'error');
+      msgbox('Configuration LADCP files (ie. MASTER.TXT & SLAVE.TXT) don''t exist ! Are you sure you want to process LADCP files?', 'Warn', 'error');
+      cfg.filename_LADCPM   = '';
+      cfg.filename_LADCPS   = '';
+      cfg.path_conf_LADCP   = '';
   end
 end
 
