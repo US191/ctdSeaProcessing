@@ -79,7 +79,6 @@ else
     config_filename = fullfile('./', mfilename,'.ini');
     cfg = configuration(config_filename);
     cfg.config_filename = config_filename;
-    cfg.path_config = path;
 end
 %% Initialization
 cfg.rep_local = fileparts(which(mfilename));
