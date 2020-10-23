@@ -34,6 +34,8 @@ else
     disp('LDEO LADCP Processing');
     process_cast(cfg.num_station);
     cd(cfg.local_path);
+    rmpath(genpath(cfg.process_LDEO));
+    rmpath(cfg.drive);
 
 end
 
