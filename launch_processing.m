@@ -16,10 +16,13 @@ if strfind(cfg.num_station,'-')
     last            = str2num(cfg.num_station(ind_sep+1:end));
     num_station     = start:last;
     for ii = 1 : length(num_station)
-        cfg.num_station = num2str(num_station(ii), '%3.3d');
+        cfg.num_station  = num2str(num_station(ii), '%03d');
+        cfg.filename_CTD = sprintf('%s', cfg.id_mission, cfg.num_station);
         process(cfg)
     end
 else
+    cfg.num_station  = num2str(str2double(cfg.num_station),'%03d');
+    cfg.filename_CTD = sprintf('%s', cfg.id_mission, cfg.num_station);
     process(cfg)
 end
 
@@ -124,11 +127,15 @@ end
                 
                 waitbar((cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP)/(counter+1), wbar, 'Copying LADCP data');
                 
+                % New file name
+                cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', cfg.num_station, '.000'); 
+                cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', cfg.num_station, '.000');
+                
                 % Test file exist
-                newfileLADCPMraw = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPM);
-                newfileLADCPSraw = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPS);
-                newfileLADCPMprocess = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPM);
-                newfileLADCPSprocess = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPS);
+                newfileLADCPMraw      = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPM);
+                newfileLADCPSraw      = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPS);
+                newfileLADCPMprocess  = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPM);
+                newfileLADCPSprocess  = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPS);
                 
                 if exist(newfileLADCPMraw,'file') && exist(newfileLADCPSraw,'file')...
                         && exist(newfileLADCPMprocess,'file') && exist(newfileLADCPSprocess,'file')

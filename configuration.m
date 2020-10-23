@@ -21,8 +21,8 @@ cfg.path_codac              = sprintf('%s', cfg.path_processing_CTD, cfg.rep_cod
 cfg.path_reports            = sprintf('%s', cfg.path_processing_CTD, cfg.rep_reports);
 
 % create path ADCP
-cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', cfg.num_station, '.000'); 
-cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', cfg.num_station, '.000');
+cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', num2str(str2double(cfg.num_station),'%03d'), '.000'); 
+cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', num2str(str2double(cfg.num_station),'%03d'), '.000');
 cfg.path_output_LADCP       = sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.rep_output_LADCP, filesep);
 cfg.path_raw_LADCP          = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_raw_LADCP, filesep);
 cfg.path_processing_LADCP   = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_processing_LADCP, filesep);

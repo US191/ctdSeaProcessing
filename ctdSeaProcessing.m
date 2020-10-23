@@ -448,6 +448,7 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
     function launcher(~, ~)
         cfg.debug_mode      = debug_mode;
         cfg.stepbystep_mode = stepbystep_mode;
+        cfg.local_path      = pwd;
         launch_processing(cfg)
         % Save workspace
         cfg.copy_SBE35    = false;

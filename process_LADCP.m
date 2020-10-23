@@ -33,6 +33,7 @@ else
     % Processing
     disp('LDEO LADCP Processing');
     process_cast(cfg.num_station);
+    cd(cfg.local_path);
 
 end
 
