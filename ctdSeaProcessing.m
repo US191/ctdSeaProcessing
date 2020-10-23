@@ -73,11 +73,13 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Get configuration
-if ~ exist(strcat(prefdir, filesep, mfilename,'.mat'), 'file')
+if ~ exist(strcat('./', mfilename,'.ini'), 'file')
     select_configfile('config_filename');
 else
-    ConfigFile = load(strcat(prefdir, filesep, mfilename,'.mat'), 'cfg');
-    cfg = ConfigFile.cfg;
+    config_filename = fullfile('./', mfilename,'.ini');
+    cfg = configuration(config_filename);
+    cfg.config_filename = config_filename;
+    cfg.path_config = path;
 end
 %% Initialization
 cfg.rep_local = fileparts(which(mfilename));
@@ -367,8 +369,7 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
             config_filename = fullfile(path, filename);
             cfg = configuration(config_filename);
             cfg.config_filename = config_filename;
-            cfg.path_config = path;
-            save(strcat(prefdir, filesep, mfilename, '.mat'), 'cfg');          
+            cfg.path_config = path;      
     end
 
 % Select files & set parameters
