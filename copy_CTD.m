@@ -83,8 +83,7 @@ fileRawCtd_xmlcon = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.xmlcon')
 fileRawCtd_bl     = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.bl');
 if cfg.process_BTL
     if ~exist(fileRawCtd_bl, 'file')
-        fileRawCtd_bl     = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.afm');
-        
+        fileRawCtd_bl     = sprintf('%s', cfg.path_raw_CTD, cfg.filename_CTD, '.afm');       
     end
 end
 

@@ -8,9 +8,11 @@
 name_mission      = PIRATA-FR30
 id_mission        = fr30
 num_station       = 000
-nomenclature_sta  = XXX
+nomenclatur
 master_ladcpname  = MASTER.txt
 slave_ladcpname   = SLAVE.txt
+name_LADCP_master = MADCP
+name_LADCP_slave  = SADCP
 log_filename      = logfile.log
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
