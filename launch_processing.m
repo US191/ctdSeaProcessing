@@ -56,6 +56,7 @@ end
                     if strcmp(Quest_process,'Yes')
                         [ind_error] = copy_CTD(cfg, logfile);
                         if ind_error
+                            close(wbar)
                             return
                         end
                     else
@@ -65,6 +66,7 @@ end
                 else
                     [ind_error] = copy_CTD(cfg, logfile);
                     if ind_error
+                        close(wbar)
                         return
                     end
                 end
@@ -95,6 +97,7 @@ end
                     if strcmp(Quest_process,'Yes')
                         [ind_error] = copy_SBE35(cfg, logfile);
                         if ind_error
+                            close(wbar)
                             return
                         end
                     else
@@ -104,6 +107,7 @@ end
                 else
                     [ind_error] = copy_SBE35(cfg, logfile);
                     if ind_error
+                        close(wbar)
                         return
                     end
                 end
@@ -146,19 +150,15 @@ end
                             return
                         end
                     else
-                        close(wbar);
                         return;
                     end
                 else
                     [ind_error] = copy_LADCP(cfg, logfile);
                     if ind_error
+                        close(wbar);
                         return
                     end
-                end
-                
-                if ~cfg.process_LADCP
-                    close(wbar);
-                end
+                end             
                 
             end
         end
@@ -178,10 +178,11 @@ end
                 waitbar((cfg.copy_CTD+cfg.process_CTD)/(counter+1), wbar, 'Processing CTD file');
                 
                 if ind_error
-                    Quest_process = questdlg({'Some problems occued during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
+                    Quest_process = questdlg({'Some problems occured during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
                     if strcmp(Quest_process,'Yes')
                         process_CTD(cfg, logfile, wbar, time_wbar);
                         if ind_error
+                            close(wbar)
                             return
                         end
                     else
@@ -193,11 +194,7 @@ end
                     if ind_error
                         return
                     end
-                end
-                
-                if ~cfg.copy_LADCP && ~cfg.process_LADCP
-                    close(wbar);
-                end
+                end              
                 
             end
         end
@@ -227,5 +224,7 @@ end
             end
             
         end
+        
+        close(wbar);
     end
 end

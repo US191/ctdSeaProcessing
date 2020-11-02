@@ -51,7 +51,7 @@ else
         error_logfile (logfile, texterror)
         msgbox({'LADCP files are missing !'...
             'Please verify files have been extracted with BBTalk'}, 'Error', 'error')
-        
+        return
     end
 
 end
@@ -108,7 +108,8 @@ else
         error_logfile (logfile, texterror)
         msgbox({'A problem occured during LADCP files copying !'...
             'Please verify the paths and the filenames'}, 'Error', 'error')    
-    
+        return
+        
     end
 
 end

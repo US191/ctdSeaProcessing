@@ -73,12 +73,11 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Get configuration
-if ~ exist(strcat('./', mfilename,'.ini'), 'file')
+if ~exist(strcat('./', mfilename,'.mat'), 'file')
     select_configfile('config_filename');
 else
-    config_filename = fullfile('./', mfilename,'.ini');
-    cfg = configuration(config_filename);
-    cfg.config_filename = config_filename;
+    ConfigFile = load(strcat('./', mfilename,'.mat'), 'cfg');
+    cfg = ConfigFile.cfg;
 end
 %% Initialization
 cfg.rep_local = fileparts(which(mfilename));
@@ -368,7 +367,8 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
             config_filename = fullfile(path, filename);
             cfg = configuration(config_filename);
             cfg.config_filename = config_filename;
-            cfg.path_config = path;      
+            cfg.path_config = path;
+            save(strcat('./', mfilename, '.mat'), 'cfg');
     end
 
 % Select files & set parameters
@@ -452,7 +452,7 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
         % Save workspace
         cfg.copy_SBE35    = false;
         cfg.process_PMEL  = false;
-        save(strcat(prefdir, filesep, mfilename, '.mat'), 'cfg');
+        save(strcat('./', mfilename, '.mat'), 'cfg');
     end
 
 end
