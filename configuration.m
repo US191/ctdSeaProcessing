@@ -50,7 +50,7 @@ if cfg.process_LADCP
       cfg.filename_LADCPM = [M(strfind(M, 'RN')+2:strfind(M, 'RN')+6),'000.000'];
       cfg.filename_LADCPS = [S(strfind(S, 'RN')+2:strfind(S, 'RN')+6),'000.000'];
   else
-      msgbox('Configuration LADCP files (ie. MASTER.TXT & SLAVE.TXT) don''t exist ! Are you sure you want to process LADCP files?', 'Warn', 'error');
+      msgbox('Configuration LADCP files don''t exist (ie. MASTER.TXT & SLAVE.TXT) ! Are you sure you want to process LADCP files?', 'Warn', 'error');
       cfg.filename_LADCPM   = '';
       cfg.filename_LADCPS   = '';
       cfg.path_conf_LADCP   = '';
