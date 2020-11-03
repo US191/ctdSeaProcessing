@@ -180,7 +180,7 @@ end
                 if ind_error
                     Quest_process = questdlg({'Some problems occured during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
                     if strcmp(Quest_process,'Yes')
-                        process_CTD(cfg, logfile, wbar, time_wbar);
+                        [ind_error] = process_CTD(cfg, logfile, wbar, time_wbar);
                         if ind_error
                             close(wbar)
                             return
@@ -190,8 +190,9 @@ end
                         return;
                     end
                 else
-                    process_CTD(cfg, logfile, wbar, time_wbar);
+                    [ind_error] = process_CTD(cfg, logfile, wbar, time_wbar);
                     if ind_error
+                        close(wbar);
                         return
                     end
                 end              

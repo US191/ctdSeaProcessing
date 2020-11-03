@@ -4,13 +4,16 @@
 % Jedi master: Jacques Grelet                                              %
 % -> Processing CTD Data                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function process_CTD(cfg, logfile, wbar, time_wbar)
+function [ind_error] = process_CTD(cfg, logfile, wbar, time_wbar)
 
 %% Initializing CTD Process
+% error indicative
+ind_error = 0; 
+
 disp(' '); disp('CTD SBE PROCESSING'); 
 fprintf(logfile, '\n CTD SBE PROCESSING \n');
 
-% Step bys tep mode
+% Step by step mode
 if cfg.stepbystep_mode
     cfg.step_arg = '#w';
     textlog = sprintf('Step by Step mode');
@@ -52,14 +55,34 @@ end
     else
         sbe_std        = sprintf('!SBEBatch.exe %sstd_wobottle.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     end
-    sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
-    sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
-    sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
-    if cfg.create_CODAC
-        codac_file     = sprintf('%s', cfg.path_codac, cfg.filename_CTD, '.cnv');
-        compress_codac = sprintf('!bzip2.exe -f %s', codac_file);
+    
+    if exist([cfg.path_processing_raw_CTD,cfg.filename_CTD,'.cnv'],'file')
+        sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+        sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
+        sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
+        if cfg.create_CODAC
+            codac_file     = sprintf('%s', cfg.path_codac, cfg.filename_CTD, '.cnv');
+            compress_codac = sprintf('!bzip2.exe -f %s', codac_file);
+        end
+        textlog        = sprintf('End of the CTD processing');
+    else
+        texterror = sprintf('>   !!! Problem with CTD files, %s%s.cnv do not exist',...
+            cfg.path_processing_raw_CTD, cfg.filename_CTD);
+        ind_error = 1;
+        
+        if cfg.debug_mode
+            
+            error_logfile (logfile, texterror)
+            
+        else
+            
+            error_logfile (logfile, texterror)
+            msgbox({'Problem with CTD files !'...
+                'Please verify if the files exist !'}, 'Error', 'error')
+            return
+            
+        end
     end
-    textlog        = sprintf('End of the CTD processing');
 
     if cfg.debug_mode
         if cfg.process_LADCP
@@ -160,4 +183,10 @@ write_logfile (logfile, textlog);
 
     end
 
+    function error_logfile (logfile, texterror)
+        
+        disp(texterror);
+        fprintf(logfile, '%s \n', texterror);
+        
+    end
 end

@@ -5,7 +5,6 @@
 % -> LADCP processing                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function process_LADCP(cfg, logfile)
-close all
 
 %% LADCP file LDEO processing
 % Initialisation
@@ -22,23 +21,25 @@ if cfg.debug_mode
 else
     
     write_logfile_CTD (logfile_CTD, textlog);
-    fclose('all');
     
     if ~exist(cfg.process_LDEO,'dir')
+        
         texterror = sprintf('>   !!! Problem with LDEO processing path');
-        ind_error = 1;
         
         if cfg.debug_mode
             
-            error_logfile (logfile, texterror)
+            error_logfile (logfile_CTD, texterror)
             
         else
             
-            error_logfile (logfile, texterror)
+            error_logfile (logfile_CTD, texterror)
             msgbox({'Problem with LDEO processing path !'...
-                'Please verify LDEO processing path'}, 'Error', 'error')
+                'Please verify LDEO processing path !'}, 'Error', 'error')
             
         end
+        
+        fclose('all');
+        
     else
         cd(cfg.process_LDEO);
         addpath(genpath(cfg.process_LDEO));
@@ -48,6 +49,7 @@ else
         
         % Processing
         disp('LDEO LADCP Processing');
+        close all;
         process_cast(cfg.num_station);
         cd(cfg.local_path);
         rmpath(genpath(cfg.process_LDEO));
@@ -67,10 +69,10 @@ disp(textlog);
 
     end
 
-    function error_logfile (logfile, texterror)
+    function error_logfile (logfile_CTD, texterror)
         
         disp(texterror);
-        fprintf(logfile, '%s \n', texterror);
+        fprintf(logfile_CTD, '%s \n', texterror);
         
     end
 
