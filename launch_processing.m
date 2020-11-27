@@ -7,7 +7,7 @@
 function launch_processing(cfg)
 
 %% Open log file
-logfile = fopen(strcat(cfg.path_config, cfg.log_filename), 'wt');
+logfile = fopen(strcat(cfg.path_logfile, cfg.log_filename), 'wt');
 
 %% Option for multiple files
 if strfind(cfg.num_station,'-')

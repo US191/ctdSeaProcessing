@@ -7,6 +7,10 @@ function cfg = configuration(config_filename)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cfg                         = ini2struct(config_filename);
 
+
+% create path Logfile
+cfg.path_logfile            = sprintf('%s', cfg.drive, filesep, cfg.name_mission, filesep, cfg.rep_logfile, filesep);
+
 % create path CTD
 cfg.filename_CTD            = sprintf('%s', cfg.id_mission, cfg.num_station);
 cfg.path_output_CTD         = sprintf('%s', cfg.path_SEASOFT, filesep, cfg.name_mission, filesep, cfg.rep_output_CTD, filesep);
