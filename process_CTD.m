@@ -66,7 +66,7 @@ end
         end
         textlog        = sprintf('End of the CTD processing');
     else
-        texterror = sprintf('>   !!! Problem with CTD files, %s%s.cnv do not exist',...
+        texterror = sprintf('>   !!! Problem with CTD files, %s%s.hex do not exist',...
             cfg.path_processing_raw_CTD, cfg.filename_CTD);
         ind_error = 1;
         

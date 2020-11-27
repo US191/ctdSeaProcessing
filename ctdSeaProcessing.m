@@ -377,7 +377,7 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
         if strcmp(member, 'config_filename')
             select_configfile
         else
-            [cfg.(member), cfg.path_conf_LADCP]  = uigetfile('*.txt', 'Select file', strcat(cfg.path_output_LADCP, cfg.(member)));
+            [cfg.(member), cfg.path_conf_LADCP]  = uigetfile('*.*', 'Select file', strcat(cfg.path_output_LADCP, cfg.(member)));
         end
         
         if ~ cfg.(member)
