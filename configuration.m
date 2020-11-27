@@ -42,8 +42,8 @@ cfg.process_BTL             = str2num(cfg.process_BTL);
 
 % find filename LADCP
 if cfg.process_LADCP
-  master_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.master_ladcpname), 'r');
-  slave_file = fopen(sprintf('%s', cfg.path_LADCP, filesep, cfg.name_mission, filesep, cfg.slave_ladcpname), 'r');
+  master_file = fopen(sprintf('%s', cfg.path_conf_LADCP, filesep, cfg.master_ladcpname), 'r');
+  slave_file = fopen(sprintf('%s', cfg.path_conf_LADCP, filesep, cfg.slave_ladcpname), 'r');
   if master_file ~= -1 || slave_file ~= -1
       M = fscanf(master_file, '%s');
       S = fscanf(slave_file, '%s');
