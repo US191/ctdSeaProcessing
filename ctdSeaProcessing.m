@@ -449,6 +449,7 @@ uicontrol(panel_infogen, 'style', 'pushbutton', ...
         cfg.debug_mode      = debug_mode;
         cfg.stepbystep_mode = stepbystep_mode;
         cfg.local_path      = pwd;
+        save(strcat('./', mfilename, '.mat'), 'cfg');
         launch_processing(cfg)
         % Save workspace
         cfg.copy_SBE35    = false;
