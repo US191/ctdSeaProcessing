@@ -56,7 +56,7 @@ end
         sbe_std        = sprintf('!SBEBatch.exe %sstd_wobottle.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
     end
     
-    if exist([cfg.path_processing_raw_CTD,cfg.filename_CTD,'.cnv'],'file')
+    if exist([cfg.path_processing_raw_CTD,cfg.filename_CTD,'.hex'],'file')
         sbe_plt        = sprintf('!SBEBatch.exe %sseaplot.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);
         sbe_report     = sprintf('!ConReport.exe %s%s.xmlcon %s', cfg.path_processing_raw_CTD, cfg.filename_CTD, cfg.path_reports);
         sbe_btl        = sprintf('!SBEBatch.exe %sbtl.batch %s %s %s', cfg.path_batch, cfg.filename_CTD, cfg.path_processing_CTD, cfg.step_arg);

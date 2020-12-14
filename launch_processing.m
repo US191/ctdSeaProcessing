@@ -8,6 +8,12 @@ function launch_processing(cfg)
 
 %% Open log file
 logfile = fopen(strcat(cfg.path_logfile, cfg.log_filename), 'wt');
+if ~exist(cfg.path_logfile, 'dir')
+	msgbox({'Problem with logfile path !'...
+                'Please verify your logfile directory !'}, 'Error', 'error')
+          return
+end
+
 
 %% Option for multiple files
 if strfind(cfg.num_station,'-')
@@ -223,9 +229,8 @@ end
                     process_LADCP(cfg, logfile);
                 end
             end
-            
+        else
+	  close(wbar)   
         end
-        
-        close(wbar);
     end
 end

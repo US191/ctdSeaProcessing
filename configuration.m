@@ -59,6 +59,11 @@ if cfg.process_LADCP
       cfg.filename_LADCPS   = '';
       cfg.path_conf_LADCP   = '';
   end
+else
+  cfg.filename_LADCPM   = '';
+  cfg.filename_LADCPS   = '';
+  cfg.path_conf_LADCP   = '';
+  cfg.path_output_LADCP = '';
 end
 
 end
