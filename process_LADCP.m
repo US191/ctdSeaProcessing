@@ -51,9 +51,10 @@ else
         disp('LDEO LADCP Processing');
         close all;
         process_cast(cfg);
-        cd(cfg.local_path);
-        rmpath(genpath(cfg.process_LDEO));
-        rmpath(cfg.drive);
+        while ishghandle(fig1)
+            pause(1)
+        end
+        close all;
     end
 
 end
