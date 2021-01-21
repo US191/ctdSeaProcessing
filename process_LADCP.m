@@ -50,7 +50,7 @@ else
         % Processing
         disp('LDEO LADCP Processing');
         close all;
-        process_cast(cfg);
+        fig1 = process_cast(cfg);
         while ishghandle(fig1)
             pause(1)
         end
