@@ -1,4 +1,4 @@
-# ctdSeaProcessing
+﻿# ctdSeaProcessing
 
 Automation pre-processing software for CTD-LADCP
 
@@ -28,7 +28,7 @@ Your computer must contain the SeaBird processing software `SBEDataProcessing` (
 You can get the latest version of these program there:
 
 * [SBEDataProcessing](http://www.seabird.com/software/sbe-data-processing)
-* [gzip2](https://github.com/anandology/gzip2)
+* [gzip2](https://github.com/anandology/gzip2) with python, or (http://gnuwin32.sourceforge.net/packages/bzip2.htm)
   
 At the beginning of a cruise:
 

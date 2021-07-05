@@ -51,11 +51,14 @@ else
         disp('LDEO LADCP Processing');
         close all;
         disp('Clear previous prepared files');
-        clear_prep(cfg.num_station)
-        process_cast(cfg);
-        cd(cfg.local_path);
-        rmpath(genpath(cfg.process_LDEO));
-        rmpath(cfg.drive);
+        clear_prep(cfg.num_station)        
+
+        fig1 = process_cast(cfg);
+        while ishghandle(fig1)
+            pause(1)
+        end
+        close all;
+
     end
 
 end

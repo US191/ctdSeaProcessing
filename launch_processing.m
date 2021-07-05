@@ -228,6 +228,11 @@ end
                     waitbar(counter/(counter+1), wbar, 'Processing LADCP file');
                     process_LADCP(cfg, logfile);
                 end
+                
+                cd(cfg.local_path);
+                rmpath(genpath(cfg.process_LDEO));
+                rmpath(cfg.drive);
+                
             end
         else
 	  close(wbar)   
