@@ -152,7 +152,8 @@ end
             if exist(codac_file, 'file')
                 waitbar(time_wbar, wbar, 'Compressing file at 5db for Coriolis');
                 write_logfile (logfile, compress_codac);
-                evalc(compress_codac);
+                result = evalc(compress_codac);
+                write_logfile (logfile, result);
                 textlog = sprintf('    End of the file compressing for Coriolis');
                 write_logfile_disp (logfile, textlog);
             else
