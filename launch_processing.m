@@ -9,7 +9,7 @@ function launch_processing(cfg)
 %% Open log file
 logfile = fopen(strcat(cfg.path_logfile, cfg.log_filename), 'wt');
 if ~exist(cfg.path_logfile, 'dir')
-                msgbox({'Problem with logfile path' cfg.path_logfile ' !'...
+	msgbox({'Problem with logfile path !'...
                 'Please verify your logfile directory !'}, 'Error', 'error')
           return
 end
@@ -24,16 +24,18 @@ if strfind(cfg.num_station,'-')
     for ii = 1 : length(num_station)
         cfg.num_station  = num2str(num_station(ii), ['%0' num2str(strlength(cfg.nomenclature_sta)) 'd']);
         cfg.filename_CTD = sprintf('%s', cfg.id_mission, cfg.num_station);
-        process(cfg)
+        process(cfg, true)
     end
 else
-    cfg.num_station  = num2str(str2double(cfg.num_station),['%0' num2str(strlength(cfg.nomenclature_sta)) 'd']);
+  % The following line was commented to comply with SWINGS station namin - blame frederic vivier for this
+  %  cfg.num_station  = num2str(str2double(cfg.num_station),['%0' num2str(strlength(cfg.nomenclature_sta)) 'd']);
     cfg.filename_CTD = sprintf('%s', cfg.id_mission, cfg.num_station);
-    process(cfg)
+    process(cfg, false)
 end
 
-    function process(cfg)
+    function process(cfg, loop_mode)
         
+        logfile = fopen(strcat(cfg.path_logfile, cfg.log_filename), 'wt');
         counter = cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP+cfg.process_LADCP;
         wbar    = waitbar(0, 'CTD-LADCP PreProcessing');
         if cfg.debug_mode
@@ -57,7 +59,7 @@ end
                 
                 waitbar(cfg.copy_CTD/(counter+1), wbar, 'Copying CTD data');
                 
-                if exist(fileRawCtd_hex,'file')
+                if exist(fileRawCtd_hex,'file') && ~loop_mode 
                     Quest_process = questdlg({'CTD files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
                     if strcmp(Quest_process,'Yes')
                         [ind_error] = copy_CTD(cfg, logfile);
@@ -98,7 +100,7 @@ end
                 
                 waitbar(cfg.copy_CTD/(counter+1), wbar, 'Copying SBE35 data');
                 
-                if exist(fileRawSBE35_hex,'file')
+                if exist(fileRawSBE35_hex,'file') && ~loop_mode 
                     Quest_process = questdlg({'SBE35 files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
                     if strcmp(Quest_process,'Yes')
                         [ind_error] = copy_SBE35(cfg, logfile);
@@ -125,6 +127,11 @@ end
         % LADCP
         % error indicative
         ind_error = 0;
+
+        % New file name
+        cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', cfg.num_station, '.000');
+        cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', cfg.num_station, '.000');
+
         
         % Copy LADCP file
         if cfg.copy_LADCP
@@ -136,11 +143,7 @@ end
             else
                 
                 waitbar((cfg.copy_CTD+cfg.process_CTD+cfg.copy_LADCP)/(counter+1), wbar, 'Copying LADCP data');
-                
-                % New file name
-                cfg.newfilename_LADCPM      = sprintf('%s', cfg.id_mission, 'M', cfg.num_station, '.000'); 
-                cfg.newfilename_LADCPS      = sprintf('%s', cfg.id_mission, 'S', cfg.num_station, '.000');
-                
+                                
                 % Test file exist
                 newfileLADCPMraw      = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPM);
                 newfileLADCPSraw      = sprintf('%s', cfg.path_raw_LADCP, cfg.newfilename_LADCPS);
@@ -148,7 +151,7 @@ end
                 newfileLADCPSprocess  = sprintf('%s', cfg.path_processing_LADCP, cfg.newfilename_LADCPS);
                 
                 if exist(newfileLADCPMraw,'file') && exist(newfileLADCPSraw,'file')...
-                        && exist(newfileLADCPMprocess,'file') && exist(newfileLADCPSprocess,'file')
+                        && exist(newfileLADCPMprocess,'file') && exist(newfileLADCPSprocess,'file') && ~loop_mode 
                     Quest_process = questdlg({'LADCP files exist !' 'Are you sure to make the process?'}, 'File exist', 'Yes', 'No', 'Yes');
                     if strcmp(Quest_process,'Yes')
                         [ind_error] = copy_LADCP(cfg, logfile);
@@ -219,20 +222,15 @@ end
                     Quest_process = questdlg({'Some problems occued during the copying process !' 'Are you sure to continu?'}, 'File exist', 'Yes', 'No', 'Yes');
                     if strcmp(Quest_process,'Yes')
                         waitbar(counter/(counter+1), wbar, 'Processing LADCP file');
-                        process_LADCP(cfg, logfile);
+                        process_LADCP(cfg, logfile, loop_mode);
                     else
                         close(wbar);
                         return;
                     end
                 else
                     waitbar(counter/(counter+1), wbar, 'Processing LADCP file');
-                    process_LADCP(cfg, logfile);
+                    process_LADCP(cfg, logfile, loop_mode);
                 end
-                
-                cd(cfg.local_path);
-                rmpath(genpath(cfg.process_LDEO));
-                rmpath(cfg.drive);
-                
             end
         else
 	  close(wbar)   

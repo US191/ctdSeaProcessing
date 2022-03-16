@@ -4,11 +4,12 @@
 % Jedi master: Jacques Grelet                                              %
 % -> LADCP processing                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function process_LADCP(cfg, logfile)
+function process_LADCP(cfg, logfile, multiple)
 
 %% LADCP file LDEO processing
 % Initialisation
 disp(' '); disp('LADCP PROCESSING'); 
+logfile = fopen(strcat(cfg.path_logfile, cfg.log_filename), 'wt');
 fprintf(logfile, '\n LADCP PROCESSING \n');
 
 disp(' '); textlog = sprintf('INITIALIZING LDEO LADCP PROCESSING');
@@ -41,6 +42,7 @@ else
         fclose('all');
         
     else
+        backup_dir = pwd;
         cd(cfg.process_LDEO);
         addpath(genpath(cfg.process_LDEO));
         addpath(cfg.drive);
@@ -54,17 +56,19 @@ else
         clear_prep(cfg.num_station)        
 
         fig1 = process_cast(cfg);
-        while ishghandle(fig1)
+        if multiple == false
+          while ishghandle(fig1)
             pause(1)
+          end
         end
         close all;
+        cd(backup_dir);
 
     end
+    disp('END OF LADCP PROCESS');
 
 end
 
-textlog = sprintf('END OF LADCP PROCESS');
-disp(textlog);
 
 %--------------------------------------------------------------------------
     function write_logfile_CTD (logfile_CTD, textlog)
